@@ -184,6 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="mpv\mpv.def" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="mpv\libmpv.dll.a" />

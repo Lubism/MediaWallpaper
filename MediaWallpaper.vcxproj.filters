@@ -254,6 +254,7 @@
     <None Include="mpv\mpv.def">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="mpv\libmpv.dll.a" />
