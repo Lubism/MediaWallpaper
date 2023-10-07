@@ -1,0 +1,58 @@
+QSlider::groove:horizontal
+{
+    border: 0px solid rgb(255,255,255);
+}
+
+QSlider::sub-page:horizontal
+{
+    background: #CD5555;
+    border-radius: 0px;
+    margin-top: 8px;
+    margin-bottom: 9px;
+}
+
+QSlider::add-page:horizontal
+{
+    background: rgb(0,0,0);
+    border: 0px solid rgb(0,255,255);
+    border-radius: 2px;
+    margin-top: 8px;
+    margin-bottom: 9px;
+}
+
+QSlider::handle:horizontal
+{
+    background: #9370DB;
+    border: 1px solid rgba(102,102,102,102);
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+QSlider::handle:horizontal:hover
+{
+    background: #A020F0;
+    border: 1px solid rgba(102,102,102,102);
+    border-radius: 5px;
+}
+
+QSlider::sub-page:horizontal:disabled
+{
+    background: #bbb;
+    border-color: #999;
+}
+
+QSlider::add-page:horizontal:disabled
+{
+    background: #eee;
+    border-color: #999;
+}
+
+QSlider::handle:horizontal:disabled
+{
+    background: #eee;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}

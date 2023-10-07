@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+***************************************************************************************************
+ Copyright (C) 2023 The Qt Company Ltd.
+ SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+***************************************************************************************************
+-->
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{79B53E2E-2D60-44C9-81B0-CAE0DA1BD754}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
+    <QtInstall>5.15.2_msvc2019_64</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtBuildConfig>debug</QtBuildConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
+    <QtInstall>5.15.2_msvc2019_64</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\libmpvcpp\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\libmpvcpp\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\MediaWidget\MediaWidget.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\GroupBox\GroupBox.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Warpper\GroupBox\BasicGroupBox\BasicGroupBox.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\ListWidget\ListWidget.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\RadioButton\RadioButton.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\Widget\Widget.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Warpper\GroupBox\FileGroupBox\FileGroupBox.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PlaylistWidget\PlaylistWidget.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PageWidget\PageWidget.hpp" />
+    <QtMoc Include="MediaWallpaper\MediaWallPaper.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\MessageBox\MessageBox.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\StackedWidget\StackedWidget.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Warpper\GroupBox\TerminalGroupBox\TerminalGroupBox.hpp" />
+    <ClInclude Include="MediaWallpaper\UI\Warpper\Resources\Resources.hpp" />
+    <ClInclude Include="MediaWallpaper\UI\Warpper\MediaData\MediaData.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PanelWidget\PanelWidget.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\MainWindow\MainWindow.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Warpper\SystemTrayIcon\SystemTrayIcon.hpp" />
+    <ClInclude Include="MediaWallpaper\UI\Warpper\Resources\SubResources\BasicGroupBoxRes.hpp" />
+    <ClInclude Include="MediaWallpaper\UI\Warpper\Resources\SubResources\FileGroupBoxRes.hpp" />
+    <ClInclude Include="MediaWallpaper\UI\Warpper\Resources\SubResources\TerminalGroupBoxRes.hpp" />
+    <ClInclude Include="mpv\include\mpv\client.h" />
+    <ClInclude Include="mpv\include\mpv\render.h" />
+    <ClInclude Include="mpv\include\mpv\render_gl.h" />
+    <ClInclude Include="mpv\include\mpv\stream_cb.h" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\ComboBox\ComboBox.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\code\mpvEndFileReason.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\code\mpvError.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\code\mpvEventID.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\code\mpvFormat.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\code\mpvLogLevel.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\container\mpvByteArray.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\container\mpvEvent.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\container\mpvNode.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvClientEvent.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvCommandEvent.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvEndFileEvent.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvHookEvent.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvLogEvent.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvPropertyEvent.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvStartFileEvent.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\mpvCommand.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\mpvException.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\mpvHandle.hpp" />
+    <ClInclude Include="MediaWallpaper\libmpvcpp\client\mpvProperty.hpp" />
+    <ClInclude Include="MediaWallpaper\UI\Basic\Converter\Converter.hpp" />
+    <ClInclude Include="MediaWallpaper\UI\Basic\DesktopHandle\DesktopHandle.hpp" />
+    <ClInclude Include="MediaWallpaper\UI\Basic\Font\Font.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\HorizontalSlider\HorizontalSlider.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\Label\Label.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\LineEdit\LineEdit.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\PushButton\PushButton.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MediaWallpaper\libmpvcpp\client\definition\mpvCommand.cpp" />
+    <ClCompile Include="MediaWallpaper\libmpvcpp\client\definition\mpvEvent.cpp" />
+    <ClCompile Include="MediaWallpaper\libmpvcpp\client\definition\mpvHandle.cpp" />
+    <ClCompile Include="MediaWallpaper\libmpvcpp\client\definition\mpvNode.cpp" />
+    <ClCompile Include="MediaWallpaper\MediaWallpaper.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Basic\ComboBox\ComboBox.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Basic\Converter\Converter.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Basic\HorizontalSlider\HorizontalSlider.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Basic\LineEdit\LineEdit.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Basic\MessageBox\MessageBox.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Warpper\GroupBox\BasicGroupBox\BasicGroupBox.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Warpper\GroupBox\FileGroupBox\FileGroupBox.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Warpper\GroupBox\TerminalGroupBox\TerminalGroupBox.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Warpper\MediaData\MediaData.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Warpper\SystemTrayIcon\SystemTrayIcon.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\MainWindow\MainWindow.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\MediaWidget\MediaWidget.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\PageWidget\PageWidget.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\PanelWidget\PanelWidget.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\PlaylistWidget\PlaylistWidget.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mpv\mpv.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="mpv\libmpv.dll.a" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MediaWallpaper.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\image\Icon.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
