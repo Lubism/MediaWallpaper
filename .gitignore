@@ -363,3 +363,12 @@ MigrationBackup/
 FodyWeavers.xsd
 /libmpvcpp
 /mpv
+/MediaWallpaper.vcxproj
+/MediaWallpaper.vcxproj.filters
+/mpv/libmpv.dll.a
+/mpv/libmpv-2.dll
+/mpv/mpv.def
+/mpv/include/mpv/client.h
+/mpv/include/mpv/render.h
+/mpv/include/mpv/render_gl.h
+/mpv/include/mpv/stream_cb.h
