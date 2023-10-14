@@ -32,18 +32,6 @@
     <ClInclude Include="MediaWallpaper\UI\Basic\DesktopHandle\DesktopHandle.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mpv\include\mpv\client.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mpv\include\mpv\render.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mpv\include\mpv\render_gl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mpv\include\mpv\stream_cb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MediaWallpaper\UI\Warpper\MediaData\MediaData.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -147,6 +135,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="libmpvcpp\render\mpvRenderParam.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mpv\include\mpv\client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mpv\include\mpv\render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mpv\include\mpv\render_gl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mpv\include\mpv\stream_cb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -278,13 +278,10 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md" />
     <None Include="mpv\mpv.def">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="mpv\libmpv.dll.a" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MediaWallpaper.rc">
@@ -295,5 +292,8 @@
     <Image Include="resources\image\Icon.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="mpv\libmpv.dll.a" />
   </ItemGroup>
 </Project>
