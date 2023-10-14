@@ -12,9 +12,8 @@ namespace UI
 		Q_OBJECT
 
 	public:
-		inline explicit MediaWidget(QWidget* parent = nullptr,
-			const int& screenIndex = 0)
-			:QWidget(parent)
+		inline explicit MediaWidget(QWidget* parent = nullptr, const int& screenIndex = 0)
+			:DesktopID(screenIndex), QWidget(parent)
 		{
 			this->allocation();
 			this->connection();
@@ -28,6 +27,7 @@ namespace UI
 		void initialization();
 	public:
 		void loadfile(const QString& data);
+		void loadconfig();
 		void play();
 		void last();
 		void next();

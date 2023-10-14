@@ -40,7 +40,6 @@ namespace UI
 		FileGroupBox* File = nullptr;
 		MediaWidget* Media = nullptr;
 		MediaData* Data = nullptr;
-		bool DurationSave = false;
 		bool StopState = false;
 	};
 }

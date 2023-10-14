@@ -30,16 +30,19 @@ namespace UI
 using namespace std;
 using namespace UI;
 
-MediaData::MediaData(QObject* parent,
-	const int& screenIndex)
-	:QObject(parent)
+MediaData::MediaData(QObject* parent, const int& screenIndex)
+	:ScreenIndex(screenIndex), QObject(parent)
 {
-	auto path = QDir::currentPath() + "/mediaData";
-	ScreenIndex = screenIndex;
-	QDir dir(path);
+	auto subPath = QDir::currentPath() + "/mediaData/config";
+	auto basePath = QDir::currentPath() + "/mediaData";
+	QDir baseDir(basePath);
+	QDir subDir(subPath);
 
-	if (dir.exists() == false)
-		dir.mkdir(path);
+	if (baseDir.exists() == false)
+		baseDir.mkdir(basePath);
+	if (subDir.exists() == false)
+		subDir.mkdir(subPath);
+
 	this->read();
 }
 

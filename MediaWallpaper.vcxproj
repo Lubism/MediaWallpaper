@@ -63,10 +63,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\libmpvcpp\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\libmpvcpp\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -74,7 +75,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\libmpvcpp\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\libmpvcpp\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -105,6 +106,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="libmpvcpp\client\code\mpvEndFileReason.hpp" />
+    <ClInclude Include="libmpvcpp\client\code\mpvError.hpp" />
+    <ClInclude Include="libmpvcpp\client\code\mpvEventID.hpp" />
+    <ClInclude Include="libmpvcpp\client\code\mpvFormat.hpp" />
+    <ClInclude Include="libmpvcpp\client\code\mpvLogLevel.hpp" />
+    <ClInclude Include="libmpvcpp\client\container\mpvByteArray.hpp" />
+    <ClInclude Include="libmpvcpp\client\container\mpvEvent.hpp" />
+    <ClInclude Include="libmpvcpp\client\container\mpvNode.hpp" />
+    <ClInclude Include="libmpvcpp\client\eventCategories\mpvClientEvent.hpp" />
+    <ClInclude Include="libmpvcpp\client\eventCategories\mpvCommandEvent.hpp" />
+    <ClInclude Include="libmpvcpp\client\eventCategories\mpvEndFileEvent.hpp" />
+    <ClInclude Include="libmpvcpp\client\eventCategories\mpvHookEvent.hpp" />
+    <ClInclude Include="libmpvcpp\client\eventCategories\mpvLogEvent.hpp" />
+    <ClInclude Include="libmpvcpp\client\eventCategories\mpvPropertyEvent.hpp" />
+    <ClInclude Include="libmpvcpp\client\eventCategories\mpvStartFileEvent.hpp" />
+    <ClInclude Include="libmpvcpp\client\mpvCommand.hpp" />
+    <ClInclude Include="libmpvcpp\client\mpvException.hpp" />
+    <ClInclude Include="libmpvcpp\client\mpvHandle.hpp" />
+    <ClInclude Include="libmpvcpp\client\mpvProperty.hpp" />
+    <ClInclude Include="libmpvcpp\render\code\mpvRenderFrameInfoType.hpp" />
+    <ClInclude Include="libmpvcpp\render\code\mpvRenderParamType.hpp" />
+    <ClInclude Include="libmpvcpp\render\mpvRenderAPIType.hpp" />
+    <ClInclude Include="libmpvcpp\render\mpvRenderContext.hpp" />
+    <ClInclude Include="libmpvcpp\render\mpvRenderFrameInfo.hpp" />
+    <ClInclude Include="libmpvcpp\render\mpvRenderParam.hpp" />
+    <ClInclude Include="libmpvcpp\render\openGL\mpvOpenGLDRMDrawSurfaceSize.hpp" />
+    <ClInclude Include="libmpvcpp\render\openGL\mpvOpenGLDRMParams.hpp" />
+    <ClInclude Include="libmpvcpp\render\openGL\mpvOpenGLFrameBufferObject.hpp" />
+    <ClInclude Include="libmpvcpp\render\openGL\mpvOpenGLInitParams.hpp" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\MediaWidget\MediaWidget.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Basic\GroupBox\GroupBox.hpp" />
@@ -132,25 +162,6 @@
     <ClInclude Include="mpv\include\mpv\render_gl.h" />
     <ClInclude Include="mpv\include\mpv\stream_cb.h" />
     <QtMoc Include="MediaWallpaper\UI\Basic\ComboBox\ComboBox.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\code\mpvEndFileReason.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\code\mpvError.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\code\mpvEventID.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\code\mpvFormat.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\code\mpvLogLevel.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\container\mpvByteArray.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\container\mpvEvent.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\container\mpvNode.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvClientEvent.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvCommandEvent.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvEndFileEvent.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvHookEvent.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvLogEvent.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvPropertyEvent.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\eventcategories\mpvStartFileEvent.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\mpvCommand.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\mpvException.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\mpvHandle.hpp" />
-    <ClInclude Include="MediaWallpaper\libmpvcpp\client\mpvProperty.hpp" />
     <ClInclude Include="MediaWallpaper\UI\Basic\Converter\Converter.hpp" />
     <ClInclude Include="MediaWallpaper\UI\Basic\DesktopHandle\DesktopHandle.hpp" />
     <ClInclude Include="MediaWallpaper\UI\Basic\Font\Font.hpp" />
@@ -161,10 +172,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MediaWallpaper\libmpvcpp\client\definition\mpvCommand.cpp" />
-    <ClCompile Include="MediaWallpaper\libmpvcpp\client\definition\mpvEvent.cpp" />
-    <ClCompile Include="MediaWallpaper\libmpvcpp\client\definition\mpvHandle.cpp" />
-    <ClCompile Include="MediaWallpaper\libmpvcpp\client\definition\mpvNode.cpp" />
+    <ClCompile Include="libmpvcpp\client\implementation\mpvEvent.cpp" />
+    <ClCompile Include="libmpvcpp\client\implementation\mpvHandle.cpp" />
+    <ClCompile Include="libmpvcpp\client\implementation\mpvNode.cpp" />
     <ClCompile Include="MediaWallpaper\MediaWallpaper.cpp" />
     <ClCompile Include="MediaWallpaper\UI\Basic\ComboBox\ComboBox.cpp" />
     <ClCompile Include="MediaWallpaper\UI\Basic\Converter\Converter.cpp" />

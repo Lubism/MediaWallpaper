@@ -136,8 +136,8 @@ void PageWidget::saveMediaData()
 void PageWidget::updateStyleSheet()
 {
 	css::Setter(css::PageWidget, this);
-	File->updateStyleSheet();
 	Basic->updateStyleSheet();
+	File->updateStyleSheet();
 }
 
 void PageWidget::resizeEvent(QResizeEvent* event)
