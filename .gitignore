@@ -372,3 +372,4 @@ FodyWeavers.xsd
 /mpv/include/mpv/render.h
 /mpv/include/mpv/render_gl.h
 /mpv/include/mpv/stream_cb.h
+/resources/css/widget/MediaWidget.css
