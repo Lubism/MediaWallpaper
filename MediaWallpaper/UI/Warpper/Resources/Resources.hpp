@@ -23,6 +23,8 @@ namespace UI
 
 		const QString PageWidget = "resources\\css\\widget\\PageWidget.css";
 
+		const QString MediaWidget = "resources\\css\\widget\\MediaWidget.css";
+
 		const QString PanelWidget = "resources\\css\\widget\\PanelWidget.css";
 
 		const QString PlaylistWidget = "resources\\css\\widget\\PlaylistWidget.css";

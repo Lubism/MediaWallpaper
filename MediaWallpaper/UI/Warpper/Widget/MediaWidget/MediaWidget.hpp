@@ -27,7 +27,8 @@ namespace UI
 		void initialization();
 	public:
 		void loadfile(const QString& data);
-		void loadconfig();
+		void updateStyleSheet();
+		void loadConfig();
 		void play();
 		void last();
 		void next();

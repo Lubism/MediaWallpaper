@@ -1,4 +1,5 @@
 #include"UI/Basic/DesktopHandle/DesktopHandle.hpp"
+#include"UI/Warpper/Resources/Resources.hpp"
 #include"client/container/mpvEvent.hpp"
 #include"client/mpvCommand.hpp"
 #include"MediaWidget.hpp"
@@ -29,11 +30,13 @@ void MediaWidget::allocation()
 
 void MediaWidget::initialization()
 {
+	this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	DesktopHandle::InsertProgman(this->winId());
 	Property::apply(Handle, "wid", Format::Int,
 		static_cast<int>(this->winId()));
+	this->updateStyleSheet();
 	this->setPlaymode(0);
-	this->loadconfig();
+	this->loadConfig();
 	StopState = false;
 	this->hide();
 
@@ -67,7 +70,12 @@ void MediaWidget::loadfile(const QString& data)
 	this->importPlayfile();
 }
 
-void MediaWidget::loadconfig()
+void MediaWidget::updateStyleSheet()
+{
+	css::Setter(css::MediaWidget, this);
+}
+
+void MediaWidget::loadConfig()
 {
 	std::string rootPath = QDir::currentPath().replace("/", "\\").toStdString();
 	std::string prefix = rootPath + "\\mediaData\\config\\screen#";
@@ -125,7 +133,7 @@ void MediaWidget::refreshDisplay()
 	std::unique_ptr<QDesktopWidget> desktop(new QDesktopWidget);
 	QRect rect = desktop->screenGeometry(DesktopID);
 	this->setGeometry(rect);
-	this->loadconfig();
+	this->loadConfig();
 }
 
 void MediaWidget::clearInfo()
@@ -273,15 +281,14 @@ void MediaWidget::eventThread()
 		for (it = 0; it < 6; it++)
 		{
 			event.receive(Handle, 0.0);
-			if (event.ErrorCode != Error::Success)
-				continue;
-			if (event.ID == EventID::GetProperty)
-			{
-				auto iter = key.find(name);
-				if (iter == key.end())
-					continue;
-				this->eventFilter(&event,
-					iter->second);
+			if (event.ErrorCode == Error::Success) {
+				if (event.ID == EventID::GetProperty) {
+					auto iter = key.find(name);
+					if (iter == key.end())
+						continue;
+					this->eventFilter(&event,
+						iter->second);
+				}
 			}
 		}
 	}

@@ -116,6 +116,7 @@ CSS样式表存放于程序根目录的 ***resources\css*** 文件夹中
 | :---:			| :---:						| :---:					|
 | 主窗口			| MainWindow				| QWidget				|
 | 页面窗口		| PageWidget				| QWidget				|
+| 播放窗口		| MediaWidget				| QWidget				|
 | 面板窗口		| PanelWidget				| QStackedWidget		|
 | 播放列表窗口	| PlaylistWidget			| QWidget, QListWidget	|
 

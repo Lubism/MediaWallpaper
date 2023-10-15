@@ -136,6 +136,7 @@ void PageWidget::saveMediaData()
 void PageWidget::updateStyleSheet()
 {
 	css::Setter(css::PageWidget, this);
+	Media->updateStyleSheet();
 	Basic->updateStyleSheet();
 	File->updateStyleSheet();
 }

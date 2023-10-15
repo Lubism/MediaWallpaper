@@ -140,13 +140,13 @@
     <ClInclude Include="mpv\include\mpv\client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mpv\include\mpv\render.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="mpv\include\mpv\render_gl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mpv\include\mpv\stream_cb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mpv\include\mpv\render.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
