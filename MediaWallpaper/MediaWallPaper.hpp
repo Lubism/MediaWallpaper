@@ -2,27 +2,24 @@
 #include<QSharedMemory>
 #include<QApplication>
 
-class QStyle;
-
 namespace UI
 {
 	class MainWindow;
 
-	class MediaWallPaper :public QApplication
+	class MediaWallpaper :public QApplication
 	{
 		Q_OBJECT
 
 	public:
-		inline MediaWallPaper(int& argc, char** argv)
+		inline MediaWallpaper(int& argc, char**& argv)
 			:QApplication(argc, argv)
 		{
-			this->allocation();
-			this->connection();
-			this->initialization();
+			this->isRunning();
 		}
 
-		virtual ~MediaWallPaper();
+		virtual ~MediaWallpaper();
 	private:
+		void isRunning();
 		void allocation();
 		void connection();
 		void initialization();
@@ -34,8 +31,6 @@ namespace UI
 		void showWindow();
 	private:
 		UI::MainWindow* Window = nullptr;
-		QStyle* Style = nullptr;
-
 		bool AlreadyRunning = false;
 		bool WorkingState = false;
 		bool StopState = true;

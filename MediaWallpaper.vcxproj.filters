@@ -193,9 +193,6 @@
     <ClCompile Include="MediaWallpaper\UI\Warpper\GroupBox\TerminalGroupBox\TerminalGroupBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MediaWallpaper\MediaWallpaper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MediaWallpaper\UI\Basic\MessageBox\MessageBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -209,6 +206,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="libmpvcpp\client\implementation\mpvNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaWallpaper\MediaWallpaper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -264,9 +264,6 @@
     <QtMoc Include="MediaWallpaper\UI\Warpper\GroupBox\TerminalGroupBox\TerminalGroupBox.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="MediaWallpaper\MediaWallPaper.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="MediaWallpaper\UI\Basic\MessageBox\MessageBox.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -274,6 +271,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="MediaWallpaper\UI\Basic\StackedWidget\StackedWidget.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="MediaWallpaper\MediaWallpaper.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -137,6 +137,7 @@
     <ClInclude Include="libmpvcpp\render\openGL\mpvOpenGLDRMParams.hpp" />
     <ClInclude Include="libmpvcpp\render\openGL\mpvOpenGLFrameBufferObject.hpp" />
     <ClInclude Include="libmpvcpp\render\openGL\mpvOpenGLInitParams.hpp" />
+    <QtMoc Include="MediaWallpaper\MediaWallpaper.hpp" />
     <ClInclude Include="mpv\include\mpv\render.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\MediaWidget\MediaWidget.hpp" />
@@ -148,7 +149,6 @@
     <QtMoc Include="MediaWallpaper\UI\Warpper\GroupBox\FileGroupBox\FileGroupBox.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PlaylistWidget\PlaylistWidget.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PageWidget\PageWidget.hpp" />
-    <QtMoc Include="MediaWallpaper\MediaWallPaper.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Basic\MessageBox\MessageBox.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Basic\StackedWidget\StackedWidget.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\GroupBox\TerminalGroupBox\TerminalGroupBox.hpp" />
