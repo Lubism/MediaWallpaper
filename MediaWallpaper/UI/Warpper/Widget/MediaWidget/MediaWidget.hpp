@@ -1,14 +1,14 @@
 #pragma once
 #include"UI/Warpper/MediaData/MediaData.hpp"
-#include"client/mpvProperty.hpp"
+#include"mpvcpp/mpvProperty.hpp"
 #include<QWidget>
 
 namespace UI
 {
 	class MediaWidget :public QWidget
 	{
-		using Property = mpv::client::Property;
-		using Format = mpv::client::Format;
+		using Format = mpv::code::Format;
+		using Property = mpv::Property;
 		Q_OBJECT
 
 	public:
@@ -26,7 +26,7 @@ namespace UI
 		void connection() {}
 		void initialization();
 	public:
-		void loadfile(const QString& data);
+		bool loadfile(const QString& data);
 		void updateStyleSheet();
 		void loadConfig();
 		void play();
@@ -63,7 +63,7 @@ namespace UI
 		void importPlayfile();
 		void acquireThread();
 		void eventThread();
-		void eventFilter(mpv::client::Event* event, int& code);
+		void eventFilter(mpv::Event* event, int& code);
 	signals:
 		void updateTime(double _position_, double _duration_);
 		void updatePlaylist(const std::vector<QString>& data);
@@ -73,7 +73,8 @@ namespace UI
 	private:
 		std::vector<QString> Playlist;
 		std::string FolderPath = "";
-		mpv::client::Handle Handle;
+		mpv::Handle Handle;
+
 		bool AcquireThread = false;
 		bool EventThread = false;
 		bool StopState = true;
@@ -94,22 +95,21 @@ namespace UI
 
 	inline void MediaWidget::setSubVisibility(bool data)
 	{
-		Property::apply(Handle, "sub-visibility",
-			Format::BooleanInt, data,
-			DesktopID);
+		Property::Apply(Handle, "sub-visibility",
+			data, DesktopID);
 	}
 
 	inline void MediaWidget::setPlaylistIndex(int data)
 	{
-		Property::apply(Handle, "playlist-pos", Format::String,
-			std::to_string(data), DesktopID);
+		Property::Apply(Handle, "playlist-pos",
+			std::to_string(data),
+			DesktopID);
 	}
 
 	inline void MediaWidget::setPosition(double data)
 	{
-		Property::apply(Handle, "playback-time",
-			Format::Double, data,
-			DesktopID);
+		Property::Apply(Handle, "playback-time",
+			data, DesktopID);
 	}
 
 	inline void MediaWidget::setPlaymode(int data)
@@ -118,55 +118,47 @@ namespace UI
 		switch (data)
 		{
 		case 0:	//	loop-playlist
-			Property::apply(Handle, "loop-playlist",
-				Format::String, "inf",
-				DesktopID);
-			Property::apply(Handle, "loop-file",
-				Format::String, "no",
-				DesktopID);
+			Property::Apply(Handle, "loop-playlist",
+				"inf", DesktopID);
+			Property::Apply(Handle, "loop-file",
+				"no", DesktopID);
 			break;
 		case 1:	//	single loop
-			Property::apply(Handle, "loop-file",
-				Format::String, "inf",
-				DesktopID);
+			Property::Apply(Handle, "loop-file",
+				"inf", DesktopID);
 			break;
 		}
 	}
 
 	inline void MediaWidget::setVolume(double data)
 	{
-		Property::apply(Handle, "volume",
-			Format::Double, data,
-			DesktopID);
+		Property::Apply(Handle, "volume",
+			data, DesktopID);
 	}
 
 	inline void MediaWidget::setSpeed(double data)
 	{
-		Property::apply(Handle, "speed",
-			Format::Double, data,
-			DesktopID);
+		Property::Apply(Handle, "speed",
+			data, DesktopID);
 	}
 
 	inline void MediaWidget::setPause(bool data)
 	{
-		Property::apply(Handle, "pause",
-			Format::BooleanInt, data,
-			DesktopID);
+		Property::Apply(Handle, "pause",
+			data, DesktopID);
 	}
 
 	inline void MediaWidget::setMute(bool data)
 	{
-		Property::apply(Handle, "mute",
-			Format::BooleanInt, data,
-			DesktopID);
+		Property::Apply(Handle, "mute",
+			data, DesktopID);
 	}
 
 	inline void MediaWidget::importData(MediaData& data)
 	{
-		if (data.FolderPath.empty())
+		if (!this->loadfile(QString::fromStdString(data.FolderPath)))
 			return;
 
-		this->loadfile(QString::fromStdString(data.FolderPath));
 		this->setSubVisibility(data.SubVisisbility);
 		this->setPlaylistIndex(data.PlaylistIndex);
 		this->setStartTime(data.Position);

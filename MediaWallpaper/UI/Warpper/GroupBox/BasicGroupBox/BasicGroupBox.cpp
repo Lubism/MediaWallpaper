@@ -145,7 +145,7 @@ void BasicGroupBox::connection_lineEdit()
 		this, [&]()
 		{
 			TimeFocused = true;
-			TimeDisplay->setText(QString::number(Position));
+			TimeDisplay->setText(QString::number(static_cast<long long>(Position)));
 		});
 	connect(TimeDisplay, &LineEdit::textChanged, this,
 		[&](const QString& text)

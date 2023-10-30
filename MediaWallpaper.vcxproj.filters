@@ -50,93 +50,6 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="libmpvcpp\client\code\mpvEndFileReason.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\code\mpvError.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\code\mpvEventID.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\code\mpvFormat.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\code\mpvLogLevel.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\container\mpvByteArray.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\container\mpvEvent.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\container\mpvNode.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\eventCategories\mpvClientEvent.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\eventCategories\mpvCommandEvent.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\eventCategories\mpvEndFileEvent.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\eventCategories\mpvHookEvent.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\eventCategories\mpvLogEvent.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\eventCategories\mpvPropertyEvent.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\eventCategories\mpvStartFileEvent.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\mpvCommand.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\mpvException.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\mpvHandle.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\client\mpvProperty.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\render\code\mpvRenderFrameInfoType.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\render\code\mpvRenderParamType.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\render\openGL\mpvOpenGLDRMDrawSurfaceSize.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\render\openGL\mpvOpenGLDRMParams.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\render\openGL\mpvOpenGLFrameBufferObject.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\render\openGL\mpvOpenGLInitParams.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\render\mpvRenderAPIType.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\render\mpvRenderContext.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\render\mpvRenderFrameInfo.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libmpvcpp\render\mpvRenderParam.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="mpv\include\mpv\client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -197,15 +110,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MediaWallpaper\UI\Warpper\SystemTrayIcon\SystemTrayIcon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libmpvcpp\client\implementation\mpvEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libmpvcpp\client\implementation\mpvHandle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libmpvcpp\client\implementation\mpvNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MediaWallpaper\MediaWallpaper.cpp">
