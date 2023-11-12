@@ -7,7 +7,9 @@ namespace UI
 {
 	class MediaWidget :public QWidget
 	{
+		using EventID = mpv::code::EventID;
 		using Format = mpv::code::Format;
+		using Error = mpv::code::Error;
 		using Property = mpv::Property;
 		Q_OBJECT
 
@@ -61,9 +63,11 @@ namespace UI
 	private:
 		void setStartTime(double data);
 		void importPlayfile();
-		void acquireThread();
+		void listenThread();
 		void eventThread();
-		void eventFilter(mpv::Event* event, int& code);
+
+		void eventFilter(mpv::Event* event,
+			const int& code);
 	signals:
 		void updateTime(double _position_, double _duration_);
 		void updatePlaylist(const std::vector<QString>& data);
@@ -71,11 +75,12 @@ namespace UI
 		void updatePlaylistIndex(int index);
 		void updatePlayfile(const QString& filename);
 	private:
+		static const std::unordered_map<std::string, int> PropertyKey;
 		std::vector<QString> Playlist;
 		std::string FolderPath = "";
 		mpv::Handle Handle;
 
-		bool AcquireThread = false;
+		bool ListenThread = false;
 		bool EventThread = false;
 		bool StopState = true;
 

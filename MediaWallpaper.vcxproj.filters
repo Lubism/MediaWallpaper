@@ -62,6 +62,9 @@
     <ClInclude Include="mpv\include\mpv\render.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="document\Principle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MediaWallpaper\UI\Basic\Converter\Converter.cpp">
@@ -186,6 +189,7 @@
     <None Include="mpv\mpv.def">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="document\CSS.md" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MediaWallpaper.rc">

@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -109,6 +109,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtMoc Include="MediaWallpaper\MediaWallpaper.hpp" />
+    <ClInclude Include="document\Principle.h" />
     <ClInclude Include="mpv\include\mpv\render.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\MediaWidget\MediaWidget.hpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\PlaylistWidget\PlaylistWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="document\CSS.md" />
     <None Include="mpv\mpv.def" />
     <None Include="README.md" />
   </ItemGroup>
