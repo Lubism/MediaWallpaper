@@ -17,7 +17,7 @@ void PanelWidget::allocation(const int& screenCount)
 void PanelWidget::connection()
 {
 	connect(this, &StackedWidget::currentChanged, this,
-		[&](int) {this->resize(this->size()); });
+		[&](int) { this->resize(this->size()); });
 }
 
 void PanelWidget::initialization()

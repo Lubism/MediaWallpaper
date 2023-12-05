@@ -19,11 +19,7 @@ MediaWidget::~MediaWidget()
 {
 	StopState = true;
 
-	while (ListenThread || EventThread)
-	{
-		this_thread::sleep_for(chrono::milliseconds(50));
-	}
-
+	while (ListenThread || EventThread);
 	DesktopHandle::RefreshProgman();
 }
 
@@ -35,28 +31,32 @@ void MediaWidget::allocation()
 
 void MediaWidget::initialization()
 {
-	this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+	this->setWindowFlags(Qt::ToolTip | Qt::FramelessWindowHint);
 	DesktopHandle::InsertProgman(this->winId());
+
 	Property::Apply(Handle, "wid", static_cast<
 		long long>(this->winId()));
+
 	this->updateStyleSheet();
 	this->setPlaymode(0);
 	this->loadConfig();
 	StopState = false;
 	this->hide();
 
-	std::thread(&MediaWidget::eventThread, this).detach();
-	std::thread(&MediaWidget::listenThread, this).detach();
+	std::thread(&MediaWidget::eventThread,
+		this).detach();
+	std::thread(&MediaWidget::listenThread,
+		this).detach();
 }
 
 bool MediaWidget::loadfile(const QString& data)
 {
 	if (data.isEmpty()) return false;
-	QDir fileValidate = QDir(data);
+	QDir directory = QDir(data);
 
-	if (fileValidate.exists() == false)
+	if (directory.exists() == false)
 		return false;
-	if (fileValidate.entryInfoList().isEmpty())
+	if (directory.entryInfoList().isEmpty())
 		return false;
 
 	FolderPath = data.toStdString();
@@ -67,15 +67,13 @@ bool MediaWidget::loadfile(const QString& data)
 			string("")
 		},
 		DesktopID);
+
 	PlaylistIndex = -1;
 	this->play();
 	Event event;
 
 	while (event.ID != code::EventID::FileLoaded)
 		event.receive(Handle);
-	if (Playlist.size() == 1) {
-		this->setPlaymode(1);
-	}
 
 	this->importPlayfile();
 	return true;
@@ -147,7 +145,8 @@ void MediaWidget::clearInfo()
 			std::string("stop"),
 			std::string(""),
 			std::string("")
-		}, DesktopID);
+		},
+		DesktopID);
 	this->stop();
 
 	Duration = Position = 0.0;
@@ -174,18 +173,21 @@ void MediaWidget::clearInfo()
 void MediaWidget::setStartTime(double data)
 {
 	long long tick = 0;
-
+	bool failState = false;
 	while (data != Position)
 	{
 		this_thread::sleep_for(chrono::milliseconds(20));
 		this->setPosition(data);
 		if (tick >= 250) {
-			this->stop();
-			QApplication::exit(-2);
-
+			failState = true;
 			break;
 		}
 		++tick;
+	}
+
+	if (failState) {
+		this->stop();
+		QApplication::exit(-2);
 	}
 }
 
@@ -272,7 +274,9 @@ void MediaWidget::eventThread()
 					auto it = PropertyKey.find(name);
 					if (it == PropertyKey.end())
 						continue;
-					this->eventFilter(&event, it->second);
+
+					this->eventFilter(&event,
+						it->second);
 				}
 			}
 		}
@@ -287,17 +291,18 @@ void MediaWidget::eventFilter(Event* event, const int& code)
 
 	switch (code)
 	{
-	case 0:	SubVisibility	= storage.Bool;		break;
-	case 1:	Position		= storage.Double;	break;
+	case 0:	SubVisibility = storage.Bool; break;
+	case 1:	Position = storage.Double; break;
 	case 2:
 		if (storage.Int != PlaylistIndex) {
 			emit this->updatePlaylistIndex(
 				storage.Int);
 			PlaylistIndex = storage.Int;
-		}
-		if (!Playlist.empty() && storage.Int > -1) {
-			emit this->updatePlayfile(Playlist.at(
-				storage.Int));
+
+			if (!Playlist.empty() && PlaylistIndex > -1) {
+				emit this->updatePlayfile(Playlist.at(
+					storage.Int));
+			}
 		}
 		break;
 	case 3:	Duration	= storage.Double;	break;

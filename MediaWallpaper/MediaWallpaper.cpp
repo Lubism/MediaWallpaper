@@ -1,11 +1,13 @@
 #include"UI/Warpper/Widget/MainWindow/MainWindow.hpp"
 #include "MediaWallpaper.hpp"
 #include<QStyleFactory>
-#include<thread>
-#include<chrono>
 #include<QFile>
 
+#include<thread>
+#include<chrono>
+
 using namespace UI;
+using namespace std;
 
 MediaWallpaper::~MediaWallpaper()
 {
@@ -63,7 +65,7 @@ void MediaWallpaper::listenThread()
 	int* Int = nullptr;
 	while (WorkingState)
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(1 << 9));
+		this_thread::sleep_for(chrono::milliseconds(1 << 9));
 		Int = static_cast<int*>(Memory.data());
 		if (Int != nullptr && *Int == 0x01)
 		{

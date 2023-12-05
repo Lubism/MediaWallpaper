@@ -67,7 +67,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\libmpvcpp\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -75,7 +75,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\libmpvcpp\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\Libmpvcpp\Libmpvcpp\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
