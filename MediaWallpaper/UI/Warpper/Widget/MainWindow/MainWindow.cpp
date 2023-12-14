@@ -8,6 +8,7 @@
 #include<QApplication>
 #include<QResizeEvent>
 #include<QCloseEvent>
+#include<QShowEvent>
 #include<QSettings>
 #include<fstream>
 #include<vector>
@@ -86,7 +87,7 @@ void MainWindow::connection()
 			AboutIcon->show();
 		});
 	connect(TrayIcon, &SystemTrayIcon::showup,
-		this, &MainWindow::show);
+		this, &MainWindow::showup);
 	connect(TrayIcon, &SystemTrayIcon::quit,
 		this, &MainWindow::quit);
 }

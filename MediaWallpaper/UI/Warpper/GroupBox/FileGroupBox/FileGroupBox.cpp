@@ -34,7 +34,7 @@ void FileGroupBox::connection()
 			emit this->refreshDisplay();
 		});
 	connect(OpenPlaylist, &PushButton::clicked,
-		Playlist, &PlaylistWidget::show);
+		Playlist, &PlaylistWidget::showup);
 	connect(SelectFolder, &PushButton::clicked,
 		this, [&]()
 		{

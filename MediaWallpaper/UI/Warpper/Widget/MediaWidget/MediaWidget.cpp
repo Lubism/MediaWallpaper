@@ -259,7 +259,7 @@ void MediaWidget::eventThread()
 	int tick = 0;
 	Event event;
 
-	auto& property = event.PropertyEvent;
+	auto& property = event.Property;
 	auto& name = property.Name;
 	while (!StopState)
 	{
@@ -287,7 +287,7 @@ void MediaWidget::eventThread()
 
 void MediaWidget::eventFilter(Event* event, const int& code)
 {
-	auto& storage = event->PropertyEvent;
+	auto& storage = event->Property;
 
 	switch (code)
 	{

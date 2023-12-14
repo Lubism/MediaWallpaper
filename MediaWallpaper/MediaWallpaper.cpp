@@ -46,7 +46,7 @@ void MediaWallpaper::connection()
 		},
 		Qt::DirectConnection);
 	connect(this, &MediaWallpaper::showWindow,
-		Window, &MainWindow::show);
+		Window, &MainWindow::showup);
 }
 
 void MediaWallpaper::initialization()

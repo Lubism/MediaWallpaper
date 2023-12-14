@@ -29,6 +29,23 @@ namespace UI
 			QWidget::setFont(Font(cvt, num,
 				this->height()));
 		}
+		
+		inline void showup()
+		{
+			if (this->isMinimized())
+			{
+				if (this->isMaximized())
+				{
+					this->showMaximized();
+				}
+				else
+				{
+					this->showNormal();
+				}
+			}
+
+			this->show();
+		}
 
 		inline virtual ~Widget() {}
 	};
