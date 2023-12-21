@@ -23,13 +23,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MediaWallpaper\UI\Basic\Font\Font.hpp">
+    <ClInclude Include="MediaWallpaper\UI\Basic\Font.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MediaWallpaper\UI\Basic\Converter\Converter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MediaWallpaper\UI\Basic\DesktopHandle\DesktopHandle.hpp">
+    <ClInclude Include="MediaWallpaper\UI\Basic\DesktopHandle.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MediaWallpaper\UI\Warpper\MediaData\MediaData.hpp">
@@ -70,7 +70,7 @@
     <ClCompile Include="MediaWallpaper\UI\Basic\Converter\Converter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Basic\HorizontalSlider\HorizontalSlider.cpp">
+    <ClCompile Include="MediaWallpaper\UI\Basic\Slider\Slider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -120,13 +120,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="MediaWallpaper\UI\Basic\PushButton\PushButton.hpp">
+    <QtMoc Include="MediaWallpaper\UI\Basic\Button\PushButton.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Basic\Label\Label.hpp">
+    <QtMoc Include="MediaWallpaper\UI\Basic\Label.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Basic\HorizontalSlider\HorizontalSlider.hpp">
+    <QtMoc Include="MediaWallpaper\UI\Basic\Slider\Slider.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="MediaWallpaper\UI\Basic\LineEdit\LineEdit.hpp">
@@ -141,16 +141,16 @@
     <QtMoc Include="MediaWallpaper\UI\Warpper\GroupBox\BasicGroupBox\BasicGroupBox.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Basic\GroupBox\GroupBox.hpp">
+    <QtMoc Include="MediaWallpaper\UI\Basic\GroupBox.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PlaylistWidget\PlaylistWidget.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Basic\ListWidget\ListWidget.hpp">
+    <QtMoc Include="MediaWallpaper\UI\Basic\Widget\ListWidget.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Basic\RadioButton\RadioButton.hpp">
+    <QtMoc Include="MediaWallpaper\UI\Basic\Button\RadioButton.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="MediaWallpaper\UI\Basic\Widget\Widget.hpp">
@@ -177,7 +177,7 @@
     <QtMoc Include="MediaWallpaper\UI\Warpper\SystemTrayIcon\SystemTrayIcon.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Basic\StackedWidget\StackedWidget.hpp">
+    <QtMoc Include="MediaWallpaper\UI\Basic\Widget\StackedWidget.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="MediaWallpaper\MediaWallpaper.hpp">

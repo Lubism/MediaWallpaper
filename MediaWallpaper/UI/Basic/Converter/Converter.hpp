@@ -1,5 +1,6 @@
 #pragma once
-#include<QObject>
+#include<QWidget>
+#include<QFont>
 
 class QResizeEvent;
 
@@ -16,7 +17,7 @@ namespace UI
 		}
 
 		void importData(int width, int height, QResizeEvent*& event);
-
+	public:
 		inline int width(double num) const
 		{
 			return static_cast<int>((num / FixWidth) * CurrentWidth);

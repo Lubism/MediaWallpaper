@@ -1,5 +1,5 @@
 #pragma once
-#include"UI/Basic/GroupBox/GroupBox.hpp"
+#include"UI/Basic/GroupBox.hpp"
 
 namespace UI
 {

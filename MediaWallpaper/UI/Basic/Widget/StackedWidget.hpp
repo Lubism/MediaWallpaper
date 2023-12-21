@@ -1,16 +1,16 @@
 #pragma once
-#include"UI/Basic/Font/Font.hpp"
-#include<QRadioButton>
+#include"UI/Basic/Font.hpp"
+#include<QStackedWidget>
 
 namespace UI
 {
-	class RadioButton :public QRadioButton
+	class StackedWidget :public QStackedWidget
 	{
 		Q_OBJECT
 
 	public:
-		inline explicit RadioButton(QWidget* parent = nullptr, const QString& text = "")
-			:QRadioButton(text, parent)
+		inline explicit StackedWidget(QWidget* parent = nullptr)
+			:QStackedWidget(parent)
 		{
 			this->setFocusPolicy(Qt::NoFocus);
 		}
@@ -29,6 +29,6 @@ namespace UI
 				this->height()));
 		}
 
-		inline virtual ~RadioButton() {}
+		inline virtual ~StackedWidget() {}
 	};
 }

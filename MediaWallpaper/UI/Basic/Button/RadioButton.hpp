@@ -1,17 +1,16 @@
 #pragma once
-#include"UI/Basic/Font/Font.hpp"
-#include<QGroupBox>
+#include"UI/Basic/Font.hpp"
+#include<QRadioButton>
 
 namespace UI
 {
-	class GroupBox :public QGroupBox
+	class RadioButton :public QRadioButton
 	{
 		Q_OBJECT
 
 	public:
-		inline explicit GroupBox(QWidget* parent = nullptr,
-			const QString& text = "")
-			:QGroupBox(text, parent)
+		inline explicit RadioButton(QWidget* parent = nullptr, const QString& text = "")
+			:QRadioButton(text, parent)
 		{
 			this->setFocusPolicy(Qt::NoFocus);
 		}
@@ -30,6 +29,6 @@ namespace UI
 				this->height()));
 		}
 
-		inline virtual ~GroupBox() {}
+		inline virtual ~RadioButton() {}
 	};
 }

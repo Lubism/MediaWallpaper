@@ -1,15 +1,15 @@
 #pragma once
-#include"UI/Basic/Font/Font.hpp"
+#include"UI/Basic/Font.hpp"
 #include<QSlider>
 
 namespace UI
 {
-	class HorizontalSlider :public QSlider
+	class Slider :public QSlider
 	{
 		Q_OBJECT
 
 	public:
-		inline explicit HorizontalSlider(QWidget* parent = nullptr, int maxnum = 100)
+		inline explicit Slider(QWidget* parent = nullptr, int maxnum = 100)
 			:QSlider(Qt::Horizontal, parent)
 		{
 			this->setMinimum(0);
@@ -36,6 +36,6 @@ namespace UI
 	signals:
 		void sliderTriggered(int value);
 	public:
-		inline virtual ~HorizontalSlider() {}
+		inline virtual ~Slider() {}
 	};
 }

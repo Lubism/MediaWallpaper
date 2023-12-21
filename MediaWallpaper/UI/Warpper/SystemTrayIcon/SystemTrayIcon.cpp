@@ -1,6 +1,6 @@
 #include"UI/Warpper/Resources/Resources.hpp"
-#include"UI/Basic/Font/Font.hpp"
 #include"SystemTrayIcon.hpp"
+#include"UI/Basic/Font.hpp"
 #include<QAction>
 #include<QMenu>
 #include<QIcon>

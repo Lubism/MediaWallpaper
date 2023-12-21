@@ -1,16 +1,17 @@
 #pragma once
-#include"UI/Basic/Font/Font.hpp"
-#include<QStackedWidget>
+#include"UI/Basic/Font.hpp"
+#include<QGroupBox>
 
 namespace UI
 {
-	class StackedWidget :public QStackedWidget
+	class GroupBox :public QGroupBox
 	{
 		Q_OBJECT
 
 	public:
-		inline explicit StackedWidget(QWidget* parent = nullptr)
-			:QStackedWidget(parent)
+		inline explicit GroupBox(QWidget* parent = nullptr,
+			const QString& text = "")
+			:QGroupBox(text, parent)
 		{
 			this->setFocusPolicy(Qt::NoFocus);
 		}
@@ -29,6 +30,6 @@ namespace UI
 				this->height()));
 		}
 
-		inline virtual ~StackedWidget() {}
+		inline virtual ~GroupBox() {}
 	};
 }

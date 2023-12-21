@@ -1,5 +1,5 @@
 #pragma once
-#include"UI/Basic/StackedWidget/StackedWidget.hpp"
+#include"UI/Basic/Widget/StackedWidget.hpp"
 
 namespace UI
 {

@@ -1,8 +1,8 @@
 #include"UI/Warpper/Resources/Resources.hpp"
-#include"UI/Basic/PushButton/PushButton.hpp"
+#include"UI/Basic/Button/PushButton.hpp"
 #include"UI/Basic/ComboBox/ComboBox.hpp"
-#include"UI/Basic/Label/Label.hpp"
 #include"TerminalGroupBox.hpp"
+#include"UI/Basic/Label.hpp"
 #include<QResizeEvent>
 
 using namespace UI;

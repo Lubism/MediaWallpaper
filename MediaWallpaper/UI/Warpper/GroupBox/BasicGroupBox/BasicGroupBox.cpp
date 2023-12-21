@@ -1,8 +1,8 @@
-#include"UI/Basic/HorizontalSlider/HorizontalSlider.hpp"
 #include"UI/Warpper/Resources/Resources.hpp"
-#include"UI/Basic/PushButton/PushButton.hpp"
+#include"UI/Basic/Button/PushButton.hpp"
 #include"UI/Basic/LineEdit/LineEdit.hpp"
-#include"UI/Basic/Label/Label.hpp"
+#include"UI/Basic/Slider/Slider.hpp"
+#include"UI/Basic/Label.hpp"
 #include"BasicGroupBox.hpp"
 #include<QResizeEvent>
 
@@ -10,9 +10,9 @@ using namespace UI;
 
 void BasicGroupBox::allocation()
 {
-	PositionSlider = new HorizontalSlider(this);
-	VolumeSlider = new HorizontalSlider(this);
-	SpeedSlider = new HorizontalSlider(this);
+	PositionSlider = new Slider(this);
+	VolumeSlider = new Slider(this);
+	SpeedSlider = new Slider(this);
 
 	VolumeDisplay = new LineEdit(this);
 	SpeedDisplay = new LineEdit(this);
@@ -42,15 +42,15 @@ void BasicGroupBox::connection()
 
 void BasicGroupBox::connection_slider()
 {
-	connect(PositionSlider, &HorizontalSlider::sliderTriggered, this,
+	connect(PositionSlider, &Slider::sliderTriggered, this,
 		[&](int value) {emit this->position(value); });
-	connect(VolumeSlider, &HorizontalSlider::sliderTriggered, this,
+	connect(VolumeSlider, &Slider::sliderTriggered, this,
 		[&](int value)
 		{
 			VolumeDisplay->setText(QString::number(value));
 			emit this->volume(value);
 		});
-	connect(SpeedSlider, &HorizontalSlider::sliderTriggered, this,
+	connect(SpeedSlider, &Slider::sliderTriggered, this,
 		[&](int value)
 		{
 			SpeedDisplay->setText(QString::number(value * 0.1));

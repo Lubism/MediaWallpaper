@@ -1,9 +1,9 @@
 #pragma once
-#include"UI/Basic/GroupBox/GroupBox.hpp"
+#include"UI/Basic/GroupBox.hpp"
 
 namespace UI
 {
-	class HorizontalSlider;
+	class Slider;
 	class PushButton;
 	class LineEdit;
 	class Label;
@@ -54,9 +54,9 @@ namespace UI
 		void next();
 		void stop();
 	private:
-		HorizontalSlider* PositionSlider = nullptr;
-		HorizontalSlider* VolumeSlider = nullptr;
-		HorizontalSlider* SpeedSlider = nullptr;
+		Slider* PositionSlider = nullptr;
+		Slider* VolumeSlider = nullptr;
+		Slider* SpeedSlider = nullptr;
 
 		LineEdit* VolumeDisplay = nullptr;
 		LineEdit* SpeedDisplay = nullptr;

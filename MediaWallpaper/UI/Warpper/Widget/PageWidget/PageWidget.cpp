@@ -4,8 +4,6 @@
 #include"UI/Warpper/Resources/Resources.hpp"
 #include"PageWidget.hpp"
 #include<QResizeEvent>
-#include<thread>
-#include<chrono>
 
 using namespace UI;
 

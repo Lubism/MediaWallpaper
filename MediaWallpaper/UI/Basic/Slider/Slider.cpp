@@ -1,26 +1,27 @@
-#include"HorizontalSlider.hpp"
 #include<QMouseEvent>
 #include<QWheelEvent>
 #include<QKeyEvent>
 
+#include"Slider.hpp"
+
 using namespace UI;
 
-void HorizontalSlider::mouseReleaseEvent(QMouseEvent* event)
+void Slider::mouseReleaseEvent(QMouseEvent* event)
 {
 	this->mouseTriggerEvent(event);
 }
 
-void HorizontalSlider::mousePressEvent(QMouseEvent* event)
+void Slider::mousePressEvent(QMouseEvent* event)
 {
 	event->ignore();
 }
 
-void HorizontalSlider::mouseMoveEvent(QMouseEvent* event)
+void Slider::mouseMoveEvent(QMouseEvent* event)
 {
 	this->mouseTriggerEvent(event);
 }
 
-void HorizontalSlider::keyReleaseEvent(QKeyEvent* event)
+void Slider::keyReleaseEvent(QKeyEvent* event)
 {
 	auto val = this->value();
 
@@ -42,12 +43,12 @@ void HorizontalSlider::keyReleaseEvent(QKeyEvent* event)
 	emit this->sliderTriggered(val);
 }
 
-void HorizontalSlider::keyPressEvent(QKeyEvent* event)
+void Slider::keyPressEvent(QKeyEvent* event)
 {
 	event->ignore();
 }
 
-void HorizontalSlider::wheelEvent(QWheelEvent* event)
+void Slider::wheelEvent(QWheelEvent* event)
 {
 	auto delta = event->delta();
 	auto step = static_cast<int>(delta / 120.00);
@@ -63,7 +64,7 @@ void HorizontalSlider::wheelEvent(QWheelEvent* event)
 	emit this->sliderTriggered(this->value());
 }
 
-void HorizontalSlider::mouseTriggerEvent(QMouseEvent*& event)
+void Slider::mouseTriggerEvent(QMouseEvent*& event)
 {
 	auto toDouble = [](int val)
 	{

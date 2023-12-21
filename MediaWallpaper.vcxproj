@@ -67,7 +67,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\IDEProject\VisualStudio2022\C++\Libmpvcpp\Libmpvcpp\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\MediaWallpaper\;E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -113,16 +113,16 @@
     <ClInclude Include="mpv\include\mpv\render.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\MediaWidget\MediaWidget.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Basic\GroupBox\GroupBox.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\GroupBox.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\GroupBox\BasicGroupBox\BasicGroupBox.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Basic\ListWidget\ListWidget.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Basic\RadioButton\RadioButton.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\Widget\ListWidget.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\Button\RadioButton.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Basic\Widget\Widget.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\GroupBox\FileGroupBox\FileGroupBox.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PlaylistWidget\PlaylistWidget.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PageWidget\PageWidget.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Basic\MessageBox\MessageBox.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Basic\StackedWidget\StackedWidget.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\Widget\StackedWidget.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Warpper\GroupBox\TerminalGroupBox\TerminalGroupBox.hpp" />
     <ClInclude Include="MediaWallpaper\UI\Warpper\Resources\Resources.hpp" />
     <ClInclude Include="MediaWallpaper\UI\Warpper\MediaData\MediaData.hpp" />
@@ -137,19 +137,19 @@
     <ClInclude Include="mpv\include\mpv\stream_cb.h" />
     <QtMoc Include="MediaWallpaper\UI\Basic\ComboBox\ComboBox.hpp" />
     <ClInclude Include="MediaWallpaper\UI\Basic\Converter\Converter.hpp" />
-    <ClInclude Include="MediaWallpaper\UI\Basic\DesktopHandle\DesktopHandle.hpp" />
-    <ClInclude Include="MediaWallpaper\UI\Basic\Font\Font.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Basic\HorizontalSlider\HorizontalSlider.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Basic\Label\Label.hpp" />
+    <ClInclude Include="MediaWallpaper\UI\Basic\DesktopHandle.hpp" />
+    <ClInclude Include="MediaWallpaper\UI\Basic\Font.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\Slider\Slider.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\Label.hpp" />
     <QtMoc Include="MediaWallpaper\UI\Basic\LineEdit\LineEdit.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Basic\PushButton\PushButton.hpp" />
+    <QtMoc Include="MediaWallpaper\UI\Basic\Button\PushButton.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MediaWallpaper\MediaWallpaper.cpp" />
     <ClCompile Include="MediaWallpaper\UI\Basic\ComboBox\ComboBox.cpp" />
     <ClCompile Include="MediaWallpaper\UI\Basic\Converter\Converter.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Basic\HorizontalSlider\HorizontalSlider.cpp" />
+    <ClCompile Include="MediaWallpaper\UI\Basic\Slider\Slider.cpp" />
     <ClCompile Include="MediaWallpaper\UI\Basic\LineEdit\LineEdit.cpp" />
     <ClCompile Include="MediaWallpaper\UI\Basic\MessageBox\MessageBox.cpp" />
     <ClCompile Include="MediaWallpaper\UI\Warpper\GroupBox\BasicGroupBox\BasicGroupBox.cpp" />
