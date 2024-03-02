@@ -1,34 +1,39 @@
 #pragma once
-#include"UI/Basic/Widget/StackedWidget.hpp"
+#include<QStackedWidget>
+
+class QGridLayout;
 
 namespace UI
 {
 	class PageWidget;
 
-	class PanelWidget :public StackedWidget
+	class PanelWidget :public QStackedWidget
 	{
+		using Int = long long;
 		Q_OBJECT
 
 	public:
 		inline explicit PanelWidget(QWidget* parent = nullptr,
-			const int& screenCount = 1)
-			:StackedWidget(parent)
+			const Int& screenCount = 1)
+			:QStackedWidget(parent)
 		{
 			this->allocation(screenCount);
 			this->connection();
 			this->initialization();
 		}
+
+		virtual ~PanelWidget() {}
 	private:
-		void allocation(const int& screenCount);
+		void allocation(const Int& screenCount);
 		void connection();
 		void initialization();
 	public:
-		void readMediaData();
-		void saveMediaData();
-		void setPage(int data);
+		inline void selectPanel(Int index) { this->setCurrentIndex(index); }
 		void updateStyleSheet();
-	protected:
-		void resizeEvent(QResizeEvent* event) override;
+		void updateLanguage();
+		void refreshDisplay();
+		bool readInfo();
+		void saveInfo();
 	private:
 		PageWidget* Page = nullptr;
 	};

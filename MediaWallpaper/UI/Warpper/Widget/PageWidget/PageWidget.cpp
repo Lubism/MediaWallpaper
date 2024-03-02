@@ -1,149 +1,211 @@
-#include"UI/Warpper/GroupBox/BasicGroupBox/BasicGroupBox.hpp"
-#include"UI/Warpper/GroupBox/FileGroupBox/FileGroupBox.hpp"
+#include"UI/Warpper/Widget/PlaylistWidget/PlaylistWidget.hpp"
+#include"UI/Warpper/Widget/BasicWidget/BasicWidget.hpp"
 #include"UI/Warpper/Widget/MediaWidget/MediaWidget.hpp"
-#include"UI/Warpper/Resources/Resources.hpp"
+#include"UI/Warpper/Widget/FileWidget/FileWidget.hpp"
+#include"UI/Warpper/Data/Translator/Translator.hpp"
+#include"UI/Warpper/Data/PanelInfo/PanelInfo.hpp"
+#include<thread>
+#include<chrono>
+
 #include"PageWidget.hpp"
-#include<QResizeEvent>
 
 using namespace UI;
 
-void PageWidget::allocation(const int& screenIndex)
+void PageWidget::allocation()
 {
-	Basic = new BasicGroupBox(this, screenIndex);
-	File = new FileGroupBox(this);
+	Playlist = new PlaylistWidget(this);
 
-	Media = new MediaWidget(this, screenIndex);
-	Data = new MediaData(this, screenIndex);
+	Basic = new BasicWidget(this, DesktopID);
+	Media = new MediaWidget(this, DesktopID);
+
+	File = new FileWidget(this);
 }
 
 void PageWidget::connection()
 {
-	this->connection_file();
-	this->connection_basic();
-	this->connection_media();
+	connect(this, &PageWidget::tabBarClicked, this,
+		[&](int index)
+		{
+			if (index == this->indexOf(Playlist))
+				Playlist->resetSelected();
+		});
+
+	connection_file();
+	connection_basic();
+	connection_media();
+	connection_playlist();
+}
+
+void PageWidget::initLayout()
+{
+	// Preserved, doing implementation while having mutiple monitor
 }
 
 void PageWidget::initialization()
 {
-	this->updateStyleSheet();
+	this->addTab(Basic, "Basic");
+	this->addTab(File, "File");
+	this->addTab(Playlist,
+		"Playlist");
 }
 
 void PageWidget::connection_file()
 {
-	connect(File, &FileGroupBox::fileSelected, this,
-		[&](int index, const QString& filename)
-		{
-			Media->setPlaylistIndex(index);
-			Basic->setFileName(filename);
-		});
-	connect(File, &FileGroupBox::folderSelected,
-		Media, &MediaWidget::loadfile);
-	connect(File, &FileGroupBox::refreshDisplay,
-		this, [&]()
-		{
-			Media->refreshDisplay();
-		});
-	connect(File, &FileGroupBox::clearInfo,
-		this, [&]()
-		{
-			Media->clearInfo();
-			Basic->clearInfo();
-			Data->clearInfo();
-		});
-
-	connect(File, &FileGroupBox::playmodeSelected,
-		Media, &MediaWidget::setPlaymode);
+	connect(File, &FileWidget::directorySelected, Media,
+		&MediaWidget::loadFile);
+	connect(File, &FileWidget::refreshDisplay, Media,
+		&MediaWidget::refreshDisplay);
+	connect(File, &FileWidget::clearInfo, Media,
+		&MediaWidget::clearInfo);
+	connect(File, &FileWidget::playmode, Media,
+		&MediaWidget::setPlaymode);
 }
 
 void PageWidget::connection_basic()
 {
-	connect(Basic, &BasicGroupBox::position, Media,
+	connect(Basic, &BasicWidget::position, Media,
 		&MediaWidget::setPosition);
-	connect(Basic, &BasicGroupBox::volume, Media,
+	connect(Basic, &BasicWidget::volume, Media,
 		&MediaWidget::setVolume);
-	connect(Basic, &BasicGroupBox::speed, Media,
+	connect(Basic, &BasicWidget::speed, Media,
 		&MediaWidget::setSpeed);
 
-	connect(Basic, &BasicGroupBox::subVisibility, Media,
+	connect(Basic, &BasicWidget::subVisibility, Media,
 		&MediaWidget::setSubVisibility);
-	connect(Basic, &BasicGroupBox::pause,
-		this, [&](bool data)
-		{
-			if (StopState == true && data == false) {
-				StopState = false;
-				Media->play();
-			}
-			else {
-				Media->setPause(data);
-			}
-		});
-	connect(Basic, &BasicGroupBox::mute, Media,
+	connect(Basic, &BasicWidget::pause, Media,
+		&MediaWidget::setPause);
+	connect(Basic, &BasicWidget::mute, Media,
 		&MediaWidget::setMute);
 
-	connect(Basic, &BasicGroupBox::last,
-		Media, &MediaWidget::last);
-	connect(Basic, &BasicGroupBox::stop,
-		this, [&]()
-		{
-			Media->stop();
-			StopState = true;
-		});
-	connect(Basic, &BasicGroupBox::next,
-		Media, &MediaWidget::next);
+	connect(Basic, &BasicWidget::last, Media,
+		&MediaWidget::last);
+	connect(Basic, &BasicWidget::next, Media,
+		&MediaWidget::next);
+	connect(Basic, &BasicWidget::stop, Media,
+		&MediaWidget::stop);
 }
 
 void PageWidget::connection_media()
 {
+	connect(Media, &MediaWidget::updateCurrentIndex, Playlist,
+		&PlaylistWidget::setCurrentIndex,
+		Qt::DirectConnection);
+	connect(Media, &MediaWidget::updatePlaylist, Playlist,
+		&PlaylistWidget::importList);
+
+	connect(Media, &MediaWidget::updateSubVisibility, Basic,
+		&BasicWidget::setSubVisibility);
+	connect(Media, &MediaWidget::currentFileChanged, Basic,
+		&BasicWidget::setFileName);
+	connect(Media, &MediaWidget::updateVolume, Basic,
+		&BasicWidget::setVolume);
+	connect(Media, &MediaWidget::updateSpeed, Basic,
+		&BasicWidget::setSpeed);
+	connect(Media, &MediaWidget::updateMute, Basic,
+		&BasicWidget::setMute);
 	connect(Media, &MediaWidget::updateTime, Basic,
-		&BasicGroupBox::setPosition);
-	connect(Media, &MediaWidget::updatePlaylist, this,
-		[&](const std::vector<QString>& data)
-		{
-			if (!data.empty()) Basic->setFileName(data.at(0));
-			File->importPlaylist(data);
-		});
-	connect(Media, &MediaWidget::updatePlayfile,
-		Basic, &BasicGroupBox::setFileName);
-	connect(Media, &MediaWidget::updatePlaylistIndex,
-		File, &FileGroupBox::setPlaylistIndex);
+		&BasicWidget::setPosition);
+
+	connect(Media, &MediaWidget::updateDirectory, File,
+		&FileWidget::setDirectoryPath);
+	connect(Media, &MediaWidget::updatePlaymode, File,
+		&FileWidget::setPlaymode,
+		Qt::QueuedConnection);
 }
 
-void PageWidget::readMediaData()
+void PageWidget::connection_playlist()
 {
-	Data->read();
-	Media->importData(*Data);
-
-	Basic->setMute(Data->Mute);
-	Basic->setSpeed(Data->Speed);
-	Basic->setPause(Data->Pause);
-	Basic->setVolume(Data->Volume);
-	Basic->setSubVisibility(Data->SubVisisbility);
-
-	File->setPlaymode(Data->Playmode);
-	File->setPlaylistSize(Data->WidgetWidth, Data->WidgetHeight);
-	File->setFolderPath(QString::fromStdString(Data->FolderPath));
-}
-
-void PageWidget::saveMediaData()
-{
-	File->playlistSize(Data->WidgetWidth, Data->WidgetHeight);
-	Media->exportData(*Data);
-	Data->save();
+	connect(Playlist, &PlaylistWidget::fileSelected, Media,
+		&MediaWidget::setCurrentIndex);
 }
 
 void PageWidget::updateStyleSheet()
 {
-	css::Setter(css::PageWidget, this);
+	Playlist->updateStyleSheet();
 	Media->updateStyleSheet();
 	Basic->updateStyleSheet();
 	File->updateStyleSheet();
 }
 
-void PageWidget::resizeEvent(QResizeEvent* event)
+void PageWidget::updateLanguage()
 {
-	Converter cvt(410, 490, event);
-	QWidget::resizeEvent(event);
+	if (!Translator::TranslationAvaliable()) return;
+	Playlist->updateLanguage();
+	Basic->updateLanguage();
+	File->updateLanguage();
 
-	Basic->setGeometry(cvt, 10, 10, 390, 230);
-	File->setGeometry(cvt, 10, 250, 390, 230);
+	this->setTabText(1, Translator::Acquire("FileGroup", "File"));
+	this->setTabText(0, Translator::Acquire("BasicGroup", "Basic"));
+	this->setTabText(2, Translator::Acquire("PlaylistGroup", "Playlist"));
+}
+
+void PageWidget::refreshDisplay()
+{
+	Media->refreshDisplay();
+}
+
+void PageWidget::setMediaInfo()
+{
+	QString group = "Desktop#" + QString::number(DesktopID);
+	auto acquire = [&](const QString& name) {return PanelInfo::Acquire(group, name); };
+
+	Media->setPlaymode(acquire("Playmode").toInt());
+	Media->setCurrentIndex(acquire("CurrentIndex").toInt());
+
+	Media->setSubVisibility(acquire("SubVisibility").toInt());
+	Media->setStartTime(acquire("Position").toDouble());
+	Media->setVolume(acquire("Volume").toDouble());
+	Media->setSpeed(acquire("Speed").toDouble());
+	Media->setMute(acquire("Mute").toDouble());
+}
+
+bool PageWidget::readInfo()
+{
+	QString group = "Desktop#" + QString::number(DesktopID);
+	if (Media->loadFile(PanelInfo::Acquire(group,
+		"DirectoryPath")))
+	{
+		this->setMediaInfo();
+		return true;
+	}
+
+	return false;
+}
+
+void PageWidget::saveInfo()
+{
+	QString group = "Desktop#" + QString::number(DesktopID);
+	auto apply = [&](const QString& name, const QString& value)
+		{
+			PanelInfo::Apply(group, name, value);
+		};
+
+	Int iData = 0;
+	bool bData = 0;
+	double dData = 0.0;
+	QString sData = "";
+
+	Media->directory(sData);
+	apply("DirectoryPath", sData);
+
+	Media->currentIndex(iData);
+	apply("CurrentIndex", QString::number(iData));
+
+	Media->playmode(iData);
+	apply("Playmode", QString::number(iData));
+
+	Media->subVisibility(bData);
+	apply("SubVisibility", QString::number(bData));
+
+	Media->position(dData);
+	apply("Position", QString::number(dData));
+
+	Media->volume(dData);
+	apply("Volume", QString::number(dData));
+
+	Media->speed(dData);
+	apply("Speed", QString::number(dData));
+
+	Media->mute(bData);
+	apply("Mute", QString::number(bData));
 }

@@ -1,0 +1,78 @@
+{
+    "MainGroup":
+    {
+        "Main": "桌面壁纸播放器"
+    },
+
+    "BasicGroup":
+    {
+        "Stop": "■",
+        "Last": "|◀",
+        "Next": "▶|",
+        "Pause": "||",
+
+        "Basic": "基本",
+        "Speed": "速度",
+        "Volume": "音量",
+        "Mute": "关闭音频",
+
+        "Desktop": "显示器ID:",
+        "Subtitle": "关闭字幕",
+        "FileName": "当前没有播放"
+    },
+
+    "FileGroup":
+    {
+        "File": "文件",
+        "Playmode": "播放模式",
+        "ListLoop": "列表循环",
+        "SingleLoop": "单项循环",
+
+        "Accept": "是",
+        "Reject": "否",
+        "ClearInfo": "清空面板信息",
+        "ClearInfoWarn": "确认？",
+        "RefreshDisplay": "刷新显示",
+        "SelectDirectory": "选择文件夹",
+        "DirectoryPath": "没有选择的文件夹"
+    },
+
+    "PlaylistGroup":
+    {
+        "Playlist": "播放列表"
+    },
+
+    "TerminalGroup":
+    {
+        "Lang": "语言",
+        "Font": "字体",
+        "Panel": "当前面板",
+
+        "No": "关闭",
+        "Yes": "开启",
+        "Autoboot": "开机自启",
+        "Fontsize": "字体大小",
+
+        "Terminal": "终端",
+        "Desktop": "显示器ID:",
+        "UpdateDisplay": "更新显示",
+        "RefreshDisplay": "刷新显示",
+        "UpdateStyleSheet": "更新界面样式"
+    },
+
+    "TrayIconGroup":
+    {
+        "Show": "显示",
+        "Quit": "退出",
+        "Screen": "显示器",
+        "Terminal": "终端",
+        "MainMenu": "主菜单",
+        "ScreenMenu": "面板显示"
+    },
+
+    "DirInfoGroup":
+    {
+        "Back": "返回上一级",
+        "Name": "目录列表"
+    }
+}

@@ -1,10 +1,13 @@
-#include"UI/Warpper/Widget/MainWindow/MainWindow.hpp"
-#include "MediaWallpaper.hpp"
+#include"UI/Warpper/Data/DesktopInfo/DesktopInfo.hpp"
+#include"UI/Warpper/Data/Translator/Translator.hpp"
 #include<QStyleFactory>
 #include<QFile>
+#include<QDir>
 
 #include<thread>
 #include<chrono>
+
+#include"MediaWallpaper.hpp"
 
 using namespace UI;
 using namespace std;
@@ -13,18 +16,25 @@ MediaWallpaper::~MediaWallpaper()
 {
 	delete Window;
 	Window = nullptr;
-	WorkingState = false;
-	while (StopState == false);
+
+	StopState = true;
+	while (ListenThread);
 }
 
 void MediaWallpaper::isRunning()
 {
-	Memory.setNativeKey(QApplication::applicationName());
+	Memory.setNativeKey("$#MediaWallpaper#$");
 	if (Memory.attach() == true)
 	{
 		AlreadyRunning = true;
 		return;
 	}
+
+	auto root = "./mediaData";
+	auto sub = "config";
+
+	QDir().mkdir(root);
+	QDir(root).mkdir(sub);
 
 	this->allocation();
 	this->connection();
@@ -33,66 +43,84 @@ void MediaWallpaper::isRunning()
 
 void MediaWallpaper::allocation()
 {
-	this->setStyle(QStyleFactory::create("fusion"));
 	Window = new MainWindow;
+	this->setStyle(QStyleFactory::create("fusion"));
 }
 
 void MediaWallpaper::connection()
 {
-	connect(this, &MediaWallpaper::commitDataRequest, this,
-		[&](QSessionManager& manager)
+	connect(this, &MediaWallpaper::commitDataRequest,
+		this, [&](QSessionManager&)
 		{
-			Window->saveMediaData();
-		},
-		Qt::DirectConnection);
-	connect(this, &MediaWallpaper::showWindow,
-		Window, &MainWindow::showup);
+			Window->saveInfo();
+		});
+
+	connect(Window, &MainWindow::selectLanguage, this,
+		&MediaWallpaper::createShortcut);
+	connect(this, &MediaWallpaper::showup, Window,
+		&MainWindow::showup);
 }
 
 void MediaWallpaper::initialization()
 {
-	QString appLink = QString::fromUtf8("\350\247\206\351\242\221\345\243\201\347\272\270\346\222\255\346\224\276\345\231\250");
-	QString appPath = QApplication::applicationFilePath();
-	QFile::link(appPath, appLink + ".lnk");
-	Window->readMediaData();
-	Memory.create(4);
-}
-
-void MediaWallpaper::listenThread()
-{
 	StopState = false;
+	Memory.create(sizeof(int));
+	auto rect = DesktopInfo::screenGeometry(0);
+	std::thread(&MediaWallpaper::listenThread, this).detach();
 
-	int* Int = nullptr;
-	while (WorkingState)
-	{
-		this_thread::sleep_for(chrono::milliseconds(1 << 9));
-		Int = static_cast<int*>(Memory.data());
-		if (Int != nullptr && *Int == 0x01)
-		{
-			*Int = 0x00;
-			emit this->showWindow();
-		}
-	}
-
-	StopState = true;
+	auto position = [](int left, int right) {return (left - right) / 2; };
+	Window->move(position(rect.width(), Window->width()),
+		position(rect.height(), Window->height())
+	);
 }
 
 int MediaWallpaper::exec()
 {
-	if (AlreadyRunning == true)
+	if (AlreadyRunning)
 	{
-		int* Int = static_cast<int*>(Memory.data());
-		if (Int != nullptr)
+		int* sign = static_cast<int*>(Memory.data());
+		if (sign != nullptr)
 		{
-			*Int = 0x01;
+			*sign = 0x01;
+			return 0;
 		}
-
-		return 0;
 	}
-	Window->show();
-	Window->hide();
-	WorkingState = true;
 
-	std::thread(&MediaWallpaper::listenThread, this).detach();
+	Window->showup();
+	if (Window->readInfo())
+	{
+		Window->hide();
+	}
+
 	return QApplication::exec();
+}
+
+void MediaWallpaper::createShortcut()
+{
+	if (!Translator::TranslationAvaliable()) return;
+	QString name = Translator::Acquire("MainGroup",
+		"Main") + ".lnk";
+
+	QFile file(name);
+	if (file.exists()) return;
+	QFile::link(this->applicationFilePath(), name);
+}
+
+void MediaWallpaper::listenThread()
+{
+	ListenThread = true;
+
+	int* sign = nullptr;
+	while (!StopState)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(1 << 9));
+		sign = static_cast<int*>(Memory.data());
+		if (sign && *sign == 0x01)
+		{
+			emit this->showup();
+			*sign = 0x00;
+		}
+	}
+
+	ListenThread = false;
 }

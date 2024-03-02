@@ -1,5 +1,6 @@
 #pragma once
 #include<QSystemTrayIcon>
+#include<vector>
 
 class QAction;
 class QMenu;
@@ -8,41 +9,39 @@ namespace UI
 {
 	class SystemTrayIcon :public QSystemTrayIcon
 	{
-		using Reason = ActivationReason;
+		using Int = long long;
 		Q_OBJECT
 
 	public:
-		inline SystemTrayIcon(QObject* parent = nullptr)
-			:QSystemTrayIcon(parent)
+		inline explicit SystemTrayIcon(QObject* parent = nullptr, const Int& screenCount = 1)
+			:QSystemTrayIcon(parent), ScreenCount(screenCount)
 		{
 			this->allocation();
 			this->connection();
 			this->initialization();
 		}
 
-		virtual ~SystemTrayIcon();
+		inline virtual ~SystemTrayIcon() {}
 	private:
 		void allocation();
 		void connection();
 		void initialization();
 	public:
-		void updateStyleSheet();
+		void updateLanguage();
 	signals:
-		void aboutProgram();
-		void aboutAuther();
-		void aboutIcon();
-
+		void selectPanel(Int index);
+		void terminal();
 		void showup();
 		void quit();
 	private:
-		QMenu* AboutMenu = nullptr;
-		QMenu* MainMenu = nullptr;
-
-		QAction* Program = nullptr;
-		QAction* Auther = nullptr;
-		QAction* Icon = nullptr;
+		Int ScreenCount = 1;
 
 		QAction* Show = nullptr;
 		QAction* Quit = nullptr;
+		QAction* Screen = nullptr;
+		QAction* Terminal = nullptr;
+
+		QMenu* MainMenu = nullptr;
+		QMenu* ScreenMenu = nullptr;
 	};
 }

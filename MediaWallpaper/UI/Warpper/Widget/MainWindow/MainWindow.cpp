@@ -1,232 +1,132 @@
-#include"UI/Warpper/GroupBox/TerminalGroupBox/TerminalGroupBox.hpp"
+#include"UI/Warpper/Widget/TerminalWidget/TerminalWidget.hpp"
 #include"UI/Warpper/Widget/PanelWidget/PanelWidget.hpp"
 #include"UI/Warpper/SystemTrayIcon/SystemTrayIcon.hpp"
-#include"UI/Basic/MessageBox/MessageBox.hpp"
-#include"UI/Warpper/Resources/Resources.hpp"
-#include"MainWindow.hpp"
-#include<QDesktopWidget>
-#include<QApplication>
-#include<QResizeEvent>
+#include"UI/Warpper/Data/DesktopInfo/DesktopInfo.hpp"
+#include"UI/Warpper/Data/ProgramInfo/ProgramInfo.hpp"
+#include"UI/Warpper/Data/Translator/Translator.hpp"
+#include"UI/Warpper/Data/StyleSheet.hpp"
+#include<QGridLayout>
 #include<QCloseEvent>
-#include<QShowEvent>
-#include<QSettings>
-#include<fstream>
-#include<vector>
-#include<QIcon>
+#include<QFile>
 
-namespace UI
-{
-	struct MainWindowSize
-	{
-		int Width = 900;
-		int Height = 550;
-	public:
-		inline MainWindowSize& operator=(const QSize& right)
-		{
-			Height = right.height();
-			Width = right.width();
-			return *this;
-		}
-
-		inline MainWindowSize(const QSize& right) {
-			this->operator=(right);
-		}
-
-		inline QSize toQSize() const {
-			QSize ret(Width, Height);
-			return ret;
-		}
-
-		inline MainWindowSize() {}
-	};
-}
+#include"MainWindow.hpp"
 
 using namespace UI;
 
+void MainWindow::quit()
+{
+	Terminal->quit();
+	QuitState = true;
+	this->close();
+}
+
 void MainWindow::allocation()
 {
-	std::unique_ptr<QDesktopWidget> desktop(new QDesktopWidget);
-	int screenCount = desktop->screenCount();
+	auto screenCount = DesktopInfo::screenCount();
 
-	Terminal = new TerminalGroupBox(this, screenCount);
+	TrayIcon = new SystemTrayIcon(this, screenCount);
+	Terminal = new TerminalWidget(this, screenCount);
 	Panel = new PanelWidget(this, screenCount);
-	TrayIcon = new SystemTrayIcon(this);
 
-	AboutProgram = new MessageBox(this,
-		Converter::CH("关于程序"));
-	AboutAuther = new MessageBox(this,
-		Converter::CH("关于作者"));
-	AboutIcon = new MessageBox(this,
-		Converter::CH("关于图标"));
+	Layout = new QGridLayout(this);
 }
 
 void MainWindow::connection()
 {
-	connect(Terminal, &TerminalGroupBox::selectPanel,
-		Panel, &PanelWidget::setPage);
-	connect(Terminal, &TerminalGroupBox::autoboot,
-		this, &MainWindow::setAutoBoot);
-	connect(Terminal, &TerminalGroupBox::updatePanel,
-		this, &MainWindow::updateStyleSheet);
-	connect(TrayIcon, &SystemTrayIcon::aboutProgram,
-		this, [&]()
-		{
-			this->show();
-			AboutProgram->aboutQt();
-		});
-	connect(TrayIcon, &SystemTrayIcon::aboutAuther,
-		this, [&]()
-		{
-			this->show();
-			AboutAuther->show();
-		});
-	connect(TrayIcon, &SystemTrayIcon::aboutIcon,
-		this, [&]()
-		{
-			this->show();
-			AboutIcon->show();
-		});
-	connect(TrayIcon, &SystemTrayIcon::showup,
-		this, &MainWindow::showup);
-	connect(TrayIcon, &SystemTrayIcon::quit,
-		this, &MainWindow::quit);
+	connect(TrayIcon, &SystemTrayIcon::selectPanel, Panel,
+		&PanelWidget::selectPanel);
+	connect(TrayIcon, &SystemTrayIcon::terminal, Terminal,
+		&TerminalWidget::showup);
+	connect(TrayIcon, &SystemTrayIcon::showup, this,
+		&MainWindow::showup);
+	connect(TrayIcon, &SystemTrayIcon::quit, this,
+		&MainWindow::quit);
+
+	connect(Terminal, &TerminalWidget::updateStyleSheet, this,
+		&MainWindow::updateStyleSheet);
+	connect(Terminal, &TerminalWidget::selectLanguage, this,
+		&MainWindow::updateLanguage);
+
+	connect(Terminal, &TerminalWidget::refreshDisplay, Panel,
+		&PanelWidget::refreshDisplay);
+	connect(Terminal, &TerminalWidget::selectPanel, Panel,
+		&PanelWidget::selectPanel);
 }
 
 void MainWindow::initialization()
 {
-	this->setWindowTitle(Converter::CH("视频壁纸播放器"));
-	this->setWindowIcon(QIcon(image::MainIcon));
-	this->setMinimumSize(900, 550);
+	this->setWindowIcon(QIcon("./resources/image/MainIcon.ico"));
+	this->setMinimumSize(540, 280);
 	this->updateStyleSheet();
 
-	AboutAuther->setText(Converter::CH("作者：Lubism(大三)"));
-	AboutAuther->setIconPixmap(QPixmap(image::AutherIcon));
-	AboutIcon->setIconPixmap(QPixmap(image::MainIcon));
-	TrayIcon->setIcon(QIcon(image::MainIcon));
+	Layout->setContentsMargins(0, 0, 0, 0);
+	Layout->addWidget(Panel);
+
+	TrayIcon->setIcon(this->windowIcon());
 	TrayIcon->show();
-
-	std::ifstream reader("autoboot.dat", std::ios::binary);
-	if (reader.fail() == false)
-	{
-		reader.read(reinterpret_cast<char*>(
-			&AutobootState),
-			sizeof(bool));
-		Terminal->setAutoboot(
-			AutobootState);
-	}
-	
-	reader.close();
-}
-
-void MainWindow::readMediaData()
-{
-	Panel->readMediaData();
-
-	std::ifstream reader("mainWindow.dat", std::ios::binary);
-	if (reader.fail()) return;
-	MainWindowSize windowSize;
-
-	reader.read(reinterpret_cast<char*>(&windowSize),
-		sizeof(windowSize));
-	this->resize(windowSize.toQSize());
-	reader.close();
-}
-
-void MainWindow::saveMediaData()
-{
-	Panel->saveMediaData();
-	MainWindowSize windowSize = this->size();
-	std::ofstream writer("mainWindow.dat", std::ios::binary);
-
-	writer.write(reinterpret_cast<char*>(&windowSize),
-		sizeof(windowSize));
-	writer.close();
 }
 
 void MainWindow::updateStyleSheet()
 {
-	css::Setter(css::MainWindow, this);
-	TrayIcon->updateStyleSheet();
+	StyleSheet::Set(this, "MainWindow");
 	Panel->updateStyleSheet();
 }
 
-void MainWindow::setAutoBoot(bool data)
+void MainWindow::updateLanguage()
 {
-	const QString regPath = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
-	std::unique_ptr<QSettings> Setting(new QSettings(regPath, QSettings::NativeFormat));
-	QString path = "\"" + QApplication::applicationDirPath().replace("/", "\\");
-	path += "\\autoboot.bat\"";
+	if (!Translator::TranslationAvaliable()) return;
+	this->setWindowTitle(Translator::Acquire(
+		"MainGroup", "Main"));
 
-	QString name = QApplication::applicationName();
-	this->makeAutobootFile(data);
-	if (data == true)
-	{
-		AutobootState = true;
-		Setting->setValue(name, path);
-		std::ofstream writer("autoboot.dat", std::ios::binary);
+	TrayIcon->updateLanguage();
+	Terminal->updateLanguage();
+	Panel->updateLanguage();
 
-		writer.write(reinterpret_cast<char*>(
-			&AutobootState),
-			sizeof(bool));
-		writer.close();
-
-		return;
-	}
-
-	int no_use = std::remove("autoboot.dat");
-	AutobootState = false;
-	Setting->remove(name);
+	emit this->selectLanguage();
 }
 
-void MainWindow::makeAutobootFile(bool data)
+bool MainWindow::readInfo()
 {
-	if (data == false)
-	{
-		int no_use = std::remove("autoboot.bat");
-		return;
-	}
+	ProgramInfo::ReadInfo();
+	int width = 0, height = 0;
 
-	std::string name = QApplication::applicationName().toStdString();
-	const std::vector<std::string> bat =
-	{
-		"@echo off",
-		"\n",
+	width = ProgramInfo::Acquire("MainWindow", "Width").toInt();
+	height = ProgramInfo::Acquire("MainWindow", "Height").toInt();
 
-		"cd /d %~dp0",
-		"\n",
+	this->resize(width, height);
+	auto result = Panel->readInfo();
 
-		"start \"\" \"" + name + ".exe\"",
-		"\n",
-
-		"exit"
-	};
-	std::string input = "";
-	for (const std::string& it : bat)
-		input += it;
-
-	std::ofstream writer("autoboot.bat");
-	writer << input;
-	writer.close();
+	Terminal->readInfo();
+	return result;
 }
 
-void MainWindow::resizeEvent(QResizeEvent* event)
+void MainWindow::saveInfo()
 {
-	Converter cvt(900, 550, event);
-	Widget::resizeEvent(event);
+	auto windowSize = this->size();
 
-	Terminal->setGeometry(cvt, 10, 10, 330, 530);
-	Panel->setGeometry(cvt, 460, 10, 430, 530);
+	ProgramInfo::Apply("MainWindow",
+		"Width", QString::number(
+		windowSize.width())
+	);
+	ProgramInfo::Apply("MainWindow",
+		"Height", QString::number(
+		windowSize.height())
+	);
+
+	Panel->saveInfo();
+	Terminal->saveInfo();
+	ProgramInfo::WriteInfo();
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
-	if (QuitState == true)
+	if (!QuitState)
 	{
-		this->saveMediaData();
-		event->accept();
+		event->ignore();
+		this->hide();
 		return;
 	}
 
-	event->ignore();
-	this->hide();
+	this->saveInfo();
+	event->accept();
 }

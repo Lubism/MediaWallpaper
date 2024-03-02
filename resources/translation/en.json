@@ -1,0 +1,78 @@
+{
+    "MainGroup":
+    {
+        "Main": "MediaWallpaper"
+    },
+
+    "BasicGroup":
+    {
+        "Stop": "■",
+        "Last": "|◀",
+        "Next": "▶|",
+        "Pause": "||",
+
+        "Mute": "Mute",
+        "Basic": "Basic",
+        "Speed": "Speed",
+        "Volume": "Volume",
+
+        "Desktop": "DesktopID:",
+        "FileName": "Not playing",
+        "Subtitle": "Close Subtitle"
+    },
+
+    "FileGroup":
+    {
+        "File": "File",
+        "Playmode": "Playmode",
+        "ListLoop": "Listloop",
+        "SingleLoop": "Singleloop",
+
+        "Accept": "Yes",
+        "Reject": "No",
+        "ClearInfo": "Clear panel info",
+        "ClearInfoWarn": "Sure ?",
+        "RefreshDisplay": "Refresh display",
+        "SelectDirectory": "Select a directory",
+        "DirectoryPath": "No selected directory"
+    },
+
+    "PlaylistGroup":
+    {
+        "Playlist": "Playlist"
+    },
+
+    "TerminalGroup":
+    {
+        "Font": "Font",
+        "Lang": "Language",
+        "Panel": "Current panel",
+
+        "No": "OFF",
+        "Yes": "ON",
+        "Autoboot": "Auto-start",
+        "Fontsize": "Font size",
+
+        "Terminal": "Terminal",
+        "Desktop": "DesktopID:",
+        "UpdateDisplay": "Update display",
+        "RefreshDisplay":"Refresh display",
+        "UpdateStyleSheet": "Update stylesheet"
+    },
+
+    "TrayIconGroup":
+    {
+        "Show": "Show",
+        "Quit": "Quit",
+        "Screen": "Desktop",
+        "Terminal": "Terminal",
+        "MainMenu": "MainMenu",
+        "ScreenMenu": "Show panel"
+    },
+
+    "DirInfoGroup":
+    {
+        "Back": "Return",
+        "Name": "Directory list"
+    }
+}

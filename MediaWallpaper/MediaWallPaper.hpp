@@ -1,4 +1,5 @@
 #pragma once
+#include"UI/Warpper/Widget/MainWindow/MainWindow.hpp"
 #include<QSharedMemory>
 #include<QApplication>
 
@@ -11,7 +12,7 @@ namespace UI
 		Q_OBJECT
 
 	public:
-		inline MediaWallpaper(int& argc, char**& argv)
+		inline MediaWallpaper(int argc, char** argv)
 			:QApplication(argc, argv)
 		{
 			this->isRunning();
@@ -23,16 +24,17 @@ namespace UI
 		void allocation();
 		void connection();
 		void initialization();
-	private:
-		void listenThread();
 	public:
 		int exec();
-	signals:
-		void showWindow();
 	private:
-		UI::MainWindow* Window = nullptr;
+		void createShortcut();
+		void listenThread();
+	signals:
+		void showup();
+	private:
+		MainWindow* Window = nullptr;
 		bool AlreadyRunning = false;
-		bool WorkingState = false;
+		bool ListenThread = false;
 		bool StopState = true;
 		QSharedMemory Memory;
 	};

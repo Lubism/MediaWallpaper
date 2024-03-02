@@ -1,55 +1,48 @@
 #pragma once
-#include"UI/Basic/Widget/Widget.hpp"
+#include"UI/Base/Widget/Widget.hpp"
+
+class QGridLayout;
 
 namespace UI
 {
-	class TerminalGroupBox;
 	class SystemTrayIcon;
+	class TerminalWidget;
 	class PanelWidget;
-	class MessageBox;
 
 	class MainWindow :public Widget
 	{
 		Q_OBJECT
 
 	public:
-		inline explicit MainWindow(QWidget* parent = nullptr)
+		inline MainWindow(QWidget* parent = nullptr)
 			:Widget(parent, Qt::Window)
 		{
 			this->allocation();
 			this->connection();
 			this->initialization();
 		}
+
+		virtual ~MainWindow() {}
 	private:
+		void quit();
 		void allocation();
 		void connection();
 		void initialization();
 	public:
-		void readMediaData();
-		void saveMediaData();
 		void updateStyleSheet();
-		void setAutoBoot(bool data);
-		void makeAutobootFile(bool data);
+		void updateLanguage();
+		bool readInfo();
+		void saveInfo();
 	protected:
-		void resizeEvent(QResizeEvent* event) override;
 		void closeEvent(QCloseEvent* event) override;
-		inline void quit();
+	signals:
+		void selectLanguage();
 	private:
-		TerminalGroupBox* Terminal = nullptr;
-		SystemTrayIcon* TrayIcon = nullptr;
+		TerminalWidget* Terminal = nullptr;
 		PanelWidget* Panel = nullptr;
 
-		MessageBox* AboutProgram = nullptr;
-		MessageBox* AboutAuther = nullptr;
-		MessageBox* AboutIcon = nullptr;
-
-		bool AutobootState = false;
+		SystemTrayIcon* TrayIcon = nullptr;
+		QGridLayout* Layout = nullptr;
 		bool QuitState = false;
 	};
-
-	inline void MainWindow::quit()
-	{
-		QuitState = true;
-		this->close();
-	}
 }

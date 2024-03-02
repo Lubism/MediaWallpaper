@@ -1,26 +1,24 @@
-#include"UI/Warpper/Resources/Resources.hpp"
-#include"UI/Basic/DesktopHandle.hpp"
-#include"mpvcpp/mpvCommand.hpp"
+#include"UI/Warpper/Data/DesktopInfo/DesktopInfo.hpp"
+#include"UI/Base/DesktopHandle/DesktopHandle.hpp"
+#include"UI/Warpper/Data/StyleSheet.hpp"
 #include"mpvcpp/mpvEvent.hpp"
-#include"MediaWidget.hpp"
-#include<unordered_map>
 #include<thread>
 #include<chrono>
-
-#include<QDesktopWidget>
-#include<QApplication>
+#include<queue>
 #include<QDir>
 
+#include"MediaWidget.hpp"
+
+using namespace mpv::code;
 using namespace mpv;
-using namespace std;
 using namespace UI;
 
 MediaWidget::~MediaWidget()
 {
+	this->stop();
 	StopState = true;
-
-	while (ListenThread || EventThread);
-	DesktopHandle::RefreshProgman();
+	while (EventThread);
+	DesktopHandle::RefreshDesktop();
 }
 
 void MediaWidget::allocation()
@@ -32,10 +30,10 @@ void MediaWidget::allocation()
 void MediaWidget::initialization()
 {
 	this->setWindowFlags(Qt::ToolTip | Qt::FramelessWindowHint);
-	DesktopHandle::InsertProgman(this->winId());
+	DesktopHandle::InsertWindow(this->winId());
 
-	Property::Apply(Handle, "wid", static_cast<
-		long long>(this->winId()));
+	Property::Apply(Handle, "wid", static_cast<long long>(
+		this->winId()), DesktopID);
 
 	this->updateStyleSheet();
 	this->setPlaymode(0);
@@ -43,122 +41,73 @@ void MediaWidget::initialization()
 	StopState = false;
 	this->hide();
 
-	std::thread(&MediaWidget::eventThread,
-		this).detach();
-	std::thread(&MediaWidget::listenThread,
-		this).detach();
+	std::thread(&MediaWidget::eventThread, this).detach();
 }
 
-bool MediaWidget::loadfile(const QString& data)
+bool MediaWidget::loadFile(const QString& data)
 {
-	if (data.isEmpty()) return false;
-	QDir directory = QDir(data);
-
-	if (directory.exists() == false)
+	auto filelist = this->analyzeDirectory(data);
+	if (filelist.empty() || data.isEmpty())
 		return false;
-	if (directory.entryInfoList().isEmpty())
-		return false;
+	Int storage = 0;
+	DirectoryPath = data;
 
-	FolderPath = data.toStdString();
-	Command::Async(this->Handle,
-		{
-			string("loadfile"),
-			FolderPath,
-			string("")
-		},
-		DesktopID);
+	Command::Sync(Handle, { "stop" });
+	for (auto& it : filelist) {
+		Command::Sync(Handle,
+			{
+				"loadfile",
+				it.toStdString(),
+				"append"
+			});
+	}
 
-	PlaylistIndex = -1;
+	emit this->updateDirectory(DirectoryPath);
+	this->setCurrentIndex(0);
+	this->importPlaylist();
 	this->play();
-	Event event;
 
-	while (event.ID != code::EventID::FileLoaded)
-		event.receive(Handle);
-
-	this->importPlayfile();
 	return true;
 }
 
 void MediaWidget::updateStyleSheet()
 {
-	css::Setter(css::MediaWidget, this);
-}
-
-void MediaWidget::loadConfig()
-{
-	std::string rootPath = QDir::currentPath().replace("/", "\\").toStdString();
-	std::string prefix = rootPath + "\\mediaData\\config\\screen#";
-	std::string number = std::to_string(DesktopID);
-	std::string suffix = ".conf";
-	
-	std::string path = prefix + number + suffix;
-	Handle.loadConfig(path);
-}
-
-void MediaWidget::play()
-{
-	this->refreshDisplay();
-	this->setPause(false);
-	this->show();
-}
-
-void MediaWidget::last()
-{
-	Command::Async(this->Handle,
-		{
-			string("playlist-prev"),
-			string("")
-		},
-		DesktopID);
-}
-
-void MediaWidget::next()
-{
-	Command::Async(this->Handle,
-		{
-			string("playlist-next"),
-			string("")
-		},
-		DesktopID);
-}
-
-void MediaWidget::stop()
-{
-	this->close();
-	this->setPause(true);
-	this->setPosition(0);
-	DesktopHandle::RefreshProgman();
+	StyleSheet::Set(this, "MediaWidget");
 }
 
 void MediaWidget::refreshDisplay()
 {
-	std::unique_ptr<QDesktopWidget> desktop(new QDesktopWidget);
-	QRect rect = desktop->screenGeometry(DesktopID);
+	QRect rect = DesktopInfo::screenGeometry(DesktopID);
+	DesktopHandle::InsertWindow(this->winId());
 	this->setGeometry(rect);
 	this->loadConfig();
 }
 
+void MediaWidget::loadConfig()
+{
+	auto path = "./mediaData/config/Desktop#" + QString::number(DesktopID) + ".conf";
+
+	QFile file(path);
+
+	if (!file.exists()) {
+		file.open(QIODevice::WriteOnly);
+		file.close();
+		return;
+	}
+
+	auto ret = Handle.loadConfig(path.toStdString());
+}
+
 void MediaWidget::clearInfo()
 {
-	Command::Async(Handle,
-		{
-			std::string("stop"),
-			std::string(""),
-			std::string("")
-		},
-		DesktopID);
+	emit this->updatePlaylist(std::vector<QString>());
+	emit this->updateCurrentIndex(-1);
+	emit this->currentFileChanged("");
+	emit this->updateDirectory("");
+
 	this->stop();
-
-	Duration = Position = 0.0;
-	SubVisibility = true;
-	Playmode = 0;
-
-	FolderPath = "";
-	Volume = 100.0;
-	Speed = 1.0;
-
-	Pause = false;
-	Mute = false;
+	this->setStartTime(0.0);
+	Command::Sync(Handle, { "stop" });
 
 	this->setSubVisibility(true);
 	this->setPlaymode(0);
@@ -168,38 +117,92 @@ void MediaWidget::clearInfo()
 
 	this->setPause(false);
 	this->setMute(false);
+
+	DirectoryPath = "";
+	Duration = 0.0;
+
+	this->hide();
+	DesktopHandle::RefreshDesktop();
 }
 
-void MediaWidget::setStartTime(double data)
+void MediaWidget::play()
 {
-	long long tick = 0;
-	bool failState = false;
+	this->refreshDisplay();
+	this->setPause(false);
+}
+
+void MediaWidget::stop()
+{
+	this->hide();
+	this->setPause(true);
+	this->setPosition(0.0);
+	DesktopHandle::RefreshDesktop();
+}
+
+bool MediaWidget::setStartTime(double data)
+{
+	Int tick = 0;
+
 	while (data != Position)
 	{
-		this_thread::sleep_for(chrono::milliseconds(20));
-		this->setPosition(data);
-		if (tick >= 250) {
-			failState = true;
-			break;
-		}
-		++tick;
+		std::this_thread::sleep_for(std::chrono::milliseconds(20));
+		Property::Apply(Handle, "playback-time", data);
+		if (tick >= 150) return false;
+		tick++;
 	}
 
-	if (failState) {
-		this->stop();
-		QApplication::exit(-2);
-	}
+	return true;
 }
 
-void MediaWidget::importPlayfile()
+void MediaWidget::setPause(bool data)
+{
+	Property::Apply(Handle, "pause", data, DesktopID);
+	if (!data) this->show();
+}
+
+std::vector<QString> MediaWidget::analyzeDirectory(const QString& dirPath)
+{
+	auto dirFilter = QDir::Dirs | QDir::NoDotAndDotDot;
+	std::queue<QString> fileQueue;
+	std::vector<QString> result;
+	QFileInfoList fileList;
+	QFileInfoList dirList;
+
+	QDir dir(dirPath);
+	QDir directory;
+
+	auto pushFile = [&]() {for (auto& it : fileList) result.push_back(it.filePath()); };
+	auto pushDir = [&]() { for (auto& it : dirList) fileQueue.push(it.filePath()); };
+	fileList = dir.entryInfoList(QDir::Files, QDir::LocaleAware);
+	dirList = dir.entryInfoList(dirFilter, QDir::LocaleAware);
+	pushFile();
+	pushDir();
+
+	while (!fileQueue.empty())
+	{
+		directory.setPath(fileQueue.front());
+		fileQueue.pop();
+
+		fileList = directory.entryInfoList(QDir::Files,
+			QDir::LocaleAware);
+		dirList = directory.entryInfoList(dirFilter,
+			QDir::LocaleAware);
+
+		pushFile();
+		pushDir();
+	}
+
+	return result;
+}
+
+void MediaWidget::importPlaylist()
 {
 	Node node;
 	QString convert = "";
 	size_t pos = 0, left = 0, right = 0;
 	std::vector<QString>().swap(Playlist);
 	Property::Acquire(Handle, "playlist", node);
-	for (auto& file : node.Array)
-	{
+	for (auto& file : node.Array) {
 		for (auto& it : file.Map)
 		{
 			if (it.first == "filename")
@@ -220,7 +223,7 @@ void MediaWidget::importPlayfile()
 				}
 				Playlist.push_back(QString::fromStdString(
 					String.substr(left,
-					right - left))
+						right - left))
 				);
 				break;
 			}
@@ -230,99 +233,43 @@ void MediaWidget::importPlayfile()
 	emit this->updatePlaylist(Playlist);
 }
 
-void MediaWidget::listenThread()
-{
-	ListenThread = true;
-
-	while (!StopState)
-	{
-		this_thread::sleep_for(chrono::milliseconds(100));
-
-		Property::Acquire(Handle, "sub-visibility", DesktopID, Format::BooleanInt);
-		Property::Acquire(Handle, "playback-time", DesktopID, Format::Double);
-		Property::Acquire(Handle, "playlist-pos", DesktopID, Format::Int);
-
-		Property::Acquire(Handle, "duration", DesktopID, Format::Double);
-		Property::Acquire(Handle, "volume", DesktopID, Format::Double);
-		Property::Acquire(Handle, "speed", DesktopID, Format::Double);
-
-		Property::Acquire(Handle, "pause", DesktopID, Format::BooleanInt);
-		Property::Acquire(Handle, "mute", DesktopID, Format::BooleanInt);
-	}
-
-	ListenThread = false;
-}
-
 void MediaWidget::eventThread()
 {
 	EventThread = true;
-	int tick = 0;
-	Event event;
+	using ID = code::EventID;
 
-	auto& property = event.Property;
-	auto& name = property.Name;
+	Event event;
 	while (!StopState)
 	{
-		this_thread::sleep_for(chrono::milliseconds(20));
+		std::this_thread::sleep_for(std::chrono::milliseconds(33));
 
-		for (tick = 0; tick < 8; tick++)
+		Property::Acquire(Handle, "sub-visibility", SubVisibility);
+		Property::Acquire(Handle, "playlist-pos", CurrentIndex);
+		Property::Acquire(Handle, "playback-time", Position);
+		Property::Acquire(Handle, "duration", Duration);
+		Property::Acquire(Handle, "volume", Volume);
+		Property::Acquire(Handle, "speed", Speed);
+		Property::Acquire(Handle, "mute", Mute);
+
+		event.receive(Handle);
+		switch (event.ID)
 		{
-			event.receive(Handle);
-			if (event.ErrorCode == code::Error::Success) {
-				if (event.ID == EventID::GetProperty)
+		case ID::FileLoaded:
+			for (auto it = Playlist.begin(); it != Playlist.end(); it++)
+			{
+				if (CurrentIndex == std::distance(Playlist.begin(), it))
 				{
-					auto it = PropertyKey.find(name);
-					if (it == PropertyKey.end())
-						continue;
-
-					this->eventFilter(&event,
-						it->second);
+					emit this->updateCurrentIndex(CurrentIndex);
+					emit this->currentFileChanged(*it);
 				}
 			}
+			break;
+		default:
+			break;
 		}
+
+		this->emitThread();
 	}
 
 	EventThread = false;
 }
-
-void MediaWidget::eventFilter(Event* event, const int& code)
-{
-	auto& storage = event->Property;
-
-	switch (code)
-	{
-	case 0:	SubVisibility = storage.Bool; break;
-	case 1:	Position = storage.Double; break;
-	case 2:
-		if (storage.Int != PlaylistIndex) {
-			emit this->updatePlaylistIndex(
-				storage.Int);
-			PlaylistIndex = storage.Int;
-
-			if (!Playlist.empty() && PlaylistIndex > -1) {
-				emit this->updatePlayfile(Playlist.at(
-					storage.Int));
-			}
-		}
-		break;
-	case 3:	Duration	= storage.Double;	break;
-	case 4:	Volume		= storage.Double;	break;
-	case 5:	Speed		= storage.Double;	break;
-	case 6:	Pause		= storage.Bool;		break;
-	case 7:	Mute		= storage.Bool;		break;
-	}
-
-	emit this->updateTime(Position, Duration);
-}
-
-const std::unordered_map<std::string, int> MediaWidget::PropertyKey =
-{
-	{"sub-visibility", 0},
-	{"playback-time", 1},
-	{"playlist-pos", 2},
-	{"duration", 3},
-	{"volume", 4},
-	{"speed", 5},
-	{"pause", 6},
-	{"mute", 7}
-};

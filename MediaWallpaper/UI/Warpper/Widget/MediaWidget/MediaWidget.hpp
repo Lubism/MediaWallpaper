@@ -1,20 +1,23 @@
 #pragma once
-#include"UI/Warpper/MediaData/MediaData.hpp"
 #include"mpvcpp/mpvProperty.hpp"
+#include"mpvcpp/mpvCommand.hpp"
+#include<unordered_map>
 #include<QWidget>
 
 namespace UI
 {
-	class MediaWidget :public QWidget
+	class MediaWidget: public QWidget
 	{
 		using EventID = mpv::code::EventID;
 		using Format = mpv::code::Format;
 		using Error = mpv::code::Error;
 		using Property = mpv::Property;
+		using Int = long long;
+
 		Q_OBJECT
 
 	public:
-		inline explicit MediaWidget(QWidget* parent = nullptr, const int& screenIndex = 0)
+		inline explicit MediaWidget(QWidget* parent = nullptr, const Int& screenIndex = 0)
 			:DesktopID(screenIndex), QWidget(parent)
 		{
 			this->allocation();
@@ -28,162 +31,104 @@ namespace UI
 		void connection() {}
 		void initialization();
 	public:
-		bool loadfile(const QString& data);
+		bool loadFile(const QString& data);
 		void updateStyleSheet();
+		void refreshDisplay();
 		void loadConfig();
+		void clearInfo();
 		void play();
-		void last();
-		void next();
 		void stop();
 	public:
-		inline void subVisibility(bool& data) const { data = this->SubVisibility; }
-		inline void playlistIndex(int& data) const { data = this->PlaylistIndex; }
-		inline void duration(double& data) const { data = this->Duration; }
-		inline void position(double& data) const { data = this->Position; }
-		inline void playmode(int& data) const { data = this->Playmode; }
-		inline void volume(double& data) const { data = this->Volume; }
-		inline void speed(double& data) const { data = this->Speed; }
-		inline void pause(bool& data) const { data = this->Pause; }
-		inline void mute(bool& data) const { data = this->Mute; }
+		inline void setSubVisibility(bool data) { Property::Apply(Handle, "sub-visibility", data, DesktopID); }
+		inline void setCurrentIndex(Int data) { Property::Apply(Handle, "playlist-pos", data, DesktopID); }
+		inline void setPosition(double data) { Property::Apply(Handle, "playback-time", data, DesktopID); }
 
-		inline void setSubVisibility(bool data);
-		inline void setPlaylistIndex(int data);
-		inline void setPosition(double data);
-		inline void setPlaymode(int data);
+		inline void setPlaymode(Int data);
+		bool setStartTime(double data);
+		void setPause(bool data);
 
-		inline void setVolume(double data);
-		inline void setSpeed(double data);
-		inline void setPause(bool data);
-		inline void setMute(bool data);
+		inline void setVolume(double data) { Property::Apply(Handle, "volume", data, DesktopID); }
+		inline void setSpeed(double data) { Property::Apply(Handle, "speed", data, DesktopID); }
+		inline void setMute(bool data) { Property::Apply(Handle, "mute", data, DesktopID); }
 
-		inline void importData(MediaData& data);
-		inline void exportData(MediaData& data);
-		void refreshDisplay();
-		void clearInfo();
+		inline void last() { mpv::Command::Async(Handle, { "playlist-prev" }, DesktopID); }
+		inline void next() { mpv::Command::Async(Handle, { "playlist-next" }, DesktopID); }
+	public:
+		inline void pause(bool& data) const { Property::Acquire(Handle, "pause", data); }
+		inline void directory(QString& data) const { data = DirectoryPath; }
+
+		inline void subVisibility(bool& data) const { data = SubVisibility; }
+		inline void currentIndex(Int& data) const { data = CurrentIndex; }
+		inline void position(double& data) const { data = Position; }
+		inline void duration(double& data) const { data = Duration; }
+		inline void playmode(Int& data) const { data = Playmode; }
+
+		inline void volume(double& data) const { data = Volume; }
+		inline void speed(double& data) const { data = Speed; }
+		inline void mute(bool& data) const { data = Mute; }
 	private:
-		void setStartTime(double data);
-		void importPlayfile();
-		void listenThread();
+		static std::vector<QString> analyzeDirectory(const QString& dirPath);
+		inline void emitThread();
+		void importPlaylist();
 		void eventThread();
-
-		void eventFilter(mpv::Event* event,
-			const int& code);
 	signals:
-		void updateTime(double _position_, double _duration_);
 		void updatePlaylist(const std::vector<QString>& data);
+		void updateTime(double position, double duration);
+		void currentFileChanged(const QString& filename);
 
-		void updatePlaylistIndex(int index);
-		void updatePlayfile(const QString& filename);
+		void updateSubVisibility(bool data);
+		void updateCurrentIndex(Int index);
+		void updatePlaymode(Int data);
+
+		void updateDirectory(const QString& data);
+		void updateVolume(double data);
+		void updateSpeed(double data);
+		void updateMute(bool data);
 	private:
-		static const std::unordered_map<std::string, int> PropertyKey;
 		std::vector<QString> Playlist;
-		std::string FolderPath = "";
-		mpv::Handle Handle;
-
-		bool ListenThread = false;
+		QString DirectoryPath = "";
 		bool EventThread = false;
 		bool StopState = true;
+		mpv::Handle Handle;
 
 		double Duration = 0.0;
 		double Position = 0.0;
-		double Volume = 100.0;
-		double Speed = 1.0;
+		double Volume = 0.0;
+		double Speed = 0.0;
 
-		int PlaylistIndex = -1;
-		int DesktopID = 0;
-		int Playmode = 0;
+		Int CurrentIndex = 0;
+		Int DesktopID = 0;
+		Int Playmode = 0;
 
 		bool SubVisibility = true;
-		bool Pause = true;
 		bool Mute = false;
 	};
 
-	inline void MediaWidget::setSubVisibility(bool data)
-	{
-		Property::Apply(Handle, "sub-visibility",
-			data, DesktopID);
-	}
-
-	inline void MediaWidget::setPlaylistIndex(int data)
-	{
-		Property::Apply(Handle, "playlist-pos",
-			std::to_string(data),
-			DesktopID);
-	}
-
-	inline void MediaWidget::setPosition(double data)
-	{
-		Property::Apply(Handle, "playback-time",
-			data, DesktopID);
-	}
-
-	inline void MediaWidget::setPlaymode(int data)
+	inline void MediaWidget::setPlaymode(Int data)
 	{
 		Playmode = data;
 		switch (data)
 		{
-		case 0:	//	loop-playlist
+		case 0LL: // loop-playlist
 			Property::Apply(Handle, "loop-playlist",
 				"inf", DesktopID);
 			Property::Apply(Handle, "loop-file",
 				"no", DesktopID);
 			break;
-		case 1:	//	single loop
+		case 1LL: // single loop
 			Property::Apply(Handle, "loop-file",
 				"inf", DesktopID);
 			break;
 		}
 	}
 
-	inline void MediaWidget::setVolume(double data)
+	inline void MediaWidget::emitThread()
 	{
-		Property::Apply(Handle, "volume",
-			data, DesktopID);
-	}
-
-	inline void MediaWidget::setSpeed(double data)
-	{
-		Property::Apply(Handle, "speed",
-			data, DesktopID);
-	}
-
-	inline void MediaWidget::setPause(bool data)
-	{
-		Property::Apply(Handle, "pause",
-			data, DesktopID);
-	}
-
-	inline void MediaWidget::setMute(bool data)
-	{
-		Property::Apply(Handle, "mute",
-			data, DesktopID);
-	}
-
-	inline void MediaWidget::importData(MediaData& data)
-	{
-		if (!this->loadfile(QString::fromStdString(data.FolderPath)))
-			return;
-
-		this->setSubVisibility(data.SubVisisbility);
-		this->setPlaylistIndex(data.PlaylistIndex);
-		this->setStartTime(data.Position);
-		this->setPlaymode(data.Playmode);
-		this->setVolume(data.Volume);
-		this->setSpeed(data.Speed);
-		this->setPause(data.Pause);
-		this->setMute(data.Mute);
-	}
-
-	inline void MediaWidget::exportData(MediaData& data)
-	{
-		data.SubVisisbility = this->SubVisibility;
-		data.PlaylistIndex = this->PlaylistIndex;
-		data.FolderPath = this->FolderPath;
-		data.Playmode = this->Playmode;
-		data.Position = this->Position;
-		data.Volume = this->Volume;
-		data.Speed = this->Speed;
-		data.Pause = this->Pause;
-		data.Mute = this->Mute;
+		emit this->updateSubVisibility(SubVisibility);
+		emit this->updateTime(Position, Duration);
+		emit this->updatePlaymode(Playmode);
+		emit this->updateVolume(Volume);
+		emit this->updateSpeed(Speed);
+		emit this->updateMute(Mute);
 	}
 }

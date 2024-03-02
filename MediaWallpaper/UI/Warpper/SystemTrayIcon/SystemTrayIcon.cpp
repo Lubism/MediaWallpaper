@@ -1,82 +1,88 @@
-#include"UI/Warpper/Resources/Resources.hpp"
+#include"UI/Warpper/Data/Translator/Translator.hpp"
 #include"SystemTrayIcon.hpp"
-#include"UI/Basic/Font.hpp"
 #include<QAction>
 #include<QMenu>
-#include<QIcon>
 
 using namespace UI;
 
-SystemTrayIcon::~SystemTrayIcon()
-{
-	delete AboutMenu;
-	delete MainMenu;
-
-	AboutMenu = nullptr;
-	MainMenu = nullptr;
-}
-
 void SystemTrayIcon::allocation()
 {
-	AboutMenu = new QMenu(nullptr);
-	MainMenu = new QMenu(nullptr);
+	Show = new QAction("Show", this);
+	Quit = new QAction("Quit", this);
+	Terminal = new QAction("Terminal", this);
 
-	Program = new QAction(this);
-	Auther = new QAction(this);
-	Icon = new QAction(this);
+	MainMenu = new QMenu("MainMenu", static_cast<QWidget*>(
+		this->parent()));
+	ScreenMenu = new QMenu("ScreenMenu", static_cast<QWidget*>(
+		this->parent()));
 
-	Show = new QAction(this);
-	Quit = new QAction(this);
+	for (auto it = 0; it < ScreenCount; it++) {
+		Screen = new QAction(QString::number(it), this);
+		ScreenMenu->addAction(Screen);
+	}
+
+	Screen = nullptr;
 }
 
 void SystemTrayIcon::connection()
 {
-	connect(Program, &QAction::triggered, this,
-		[&]() {emit this->aboutProgram(); });
-	connect(Auther, &QAction::triggered, this,
-		[&]() {emit this->aboutAuther(); });
-	connect(Icon, &QAction::triggered, this,
-		[&]() {emit this->aboutIcon(); });
+	connect(this, &QSystemTrayIcon::activated, this, [&](QSystemTrayIcon::ActivationReason reason)
+		{
+			if (reason == ActivationReason::DoubleClick)
+				emit this->showup();
+		});
 
+	connect(ScreenMenu, &QMenu::triggered, this,
+		[&](QAction* target)
+		{
+			Int index = 0;
+			auto list = ScreenMenu->actions();
+			for (auto it = list.begin(); it != list.end(); it++) {
+				index = std::distance(list.begin(), it);
+				if (target == *it)
+				{
+					emit this->selectPanel(index);
+					break;
+				}
+			}
+		});
+
+	connect(Terminal, &QAction::triggered, this,
+		[&]() {emit this->terminal(); });
 	connect(Show, &QAction::triggered, this,
 		[&]() {emit this->showup(); });
 	connect(Quit, &QAction::triggered, this,
 		[&]() {emit this->quit(); });
-
-	connect(this, &QSystemTrayIcon::activated, this,
-		[&](ActivationReason reason)
-		{
-			if (reason == Reason::DoubleClick)
-				emit this->showup();
-		});
 }
 
 void SystemTrayIcon::initialization()
 {
-	this->setIcon(QIcon("resources\\image\\Icon.ico"));
-	this->setContextMenu(MainMenu);
-
-	AboutMenu->addAction(Program);
-	AboutMenu->addAction(Auther);
-	AboutMenu->addAction(Icon);
-
-	MainMenu->addMenu(AboutMenu);
+	MainMenu->addMenu(ScreenMenu);
+	MainMenu->addAction(Terminal);
 	MainMenu->addAction(Show);
 	MainMenu->addAction(Quit);
 
-	AboutMenu->setTitle(Converter::CH("关于"));
-	Program->setText(Converter::CH("程序"));
-	Auther->setText(Converter::CH("作者"));
-	Icon->setText(Converter::CH("图标"));
-
-	Show->setText(Converter::CH("显示"));
-	Quit->setText(Converter::CH("退出"));
-
-	this->updateStyleSheet();
+	this->setContextMenu(MainMenu);
 }
 
-void SystemTrayIcon::updateStyleSheet()
+void SystemTrayIcon::updateLanguage()
 {
-	css::Setter(css::MainMenu, MainMenu);
-	css::Setter(css::AboutMenu, AboutMenu);
+	auto receive = [](const QString& name) {return Translator::Acquire("TrayIconGroup", name); };
+	if (!Translator::TranslationAvaliable()) return;
+
+	Show->setText(receive("Show"));
+	Quit->setText(receive("Quit"));
+	Terminal->setText(receive("Terminal"));
+
+	auto list = ScreenMenu->actions();
+	auto storage = receive("Screen");
+	auto size = list.size();
+
+	for (auto it = 0; it < size; it++)
+	{
+		list.at(it)->setText(storage + QString::number(it));
+	}
+
+	MainMenu->setTitle(receive("MainMenu"));
+	ScreenMenu->setTitle(receive("ScreenMenu"));
 }

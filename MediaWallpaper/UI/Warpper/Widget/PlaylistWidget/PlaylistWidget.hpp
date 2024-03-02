@@ -1,41 +1,66 @@
 #pragma once
-#include"UI/Basic/Widget/Widget.hpp"
-#include<vector>
+#include<QListWidget>
+#include<QWidget>
 
-class QListWidgetItem;
+class QGridLayout;
+class QListWidget;
 
 namespace UI
 {
-	class ListWidget;
-
-	class PlaylistWidget :public Widget
+	class PlaylistWidget :public QListWidget
 	{
+		using Int = long long;
 		Q_OBJECT
 
 	public:
 		inline explicit PlaylistWidget(QWidget* parent = nullptr)
-			:Widget(parent, Qt::Window)
+			:QListWidget(parent)
 		{
-			this->allocation();
-			this->connection();
-			this->initialization();
+			connect(this, &QListWidget::itemDoubleClicked, this,
+				[&](QListWidgetItem* item)
+				{
+					CurrentIndex = this->row(item);
+					emit this->fileSelected(CurrentIndex);
+				},
+				Qt::DirectConnection);
+
+			this->setFocusPolicy(Qt::NoFocus);
 		}
-	private:
-		void allocation();
-		void connection();
-		void initialization();
+
+		virtual ~PlaylistWidget() {}
 	public:
-		void importPlaylist(const std::vector<QString>& data);
-		void setPlaylistIndex(int index);
-		void clearPlaylist();
-	protected:
-		void resizeEvent(QResizeEvent* event) override;
-		void closeEvent(QCloseEvent* event) override;
+		inline void importList(const std::vector<QString>& data);
+		inline void setCurrentIndex(Int index);
+		inline void resetSelected();
+		void updateStyleSheet();
+		void updateLanguage();
 	signals:
-		void fileSelected(int index, const QString& filename);
+		void fileSelected(Int index);
 	private:
-		QListWidgetItem* Item = nullptr;
-		ListWidget* Display = nullptr;
 		int CurrentIndex = 0;
+		QListWidgetItem* Item = nullptr;
 	};
+
+	inline void PlaylistWidget::importList(const std::vector<QString>& data)
+	{
+		this->clear();
+		Item = nullptr;
+		for (auto& it : data)
+		{
+			this->addItem(it);
+		}
+	}
+
+	inline void PlaylistWidget::setCurrentIndex(Int index)
+	{
+		CurrentIndex = index;
+		Item = this->item(index);
+	}
+
+	inline void PlaylistWidget::resetSelected()
+	{
+		this->scrollToBottom();
+		this->scrollToItem(Item);
+		this->setCurrentRow(CurrentIndex);
+	}
 }
