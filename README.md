@@ -1,9 +1,11 @@
-# MediaWallpaper ÊÓÆµ±ÚÖ½²¥·ÅÆ÷
+# MediaWallpaper è§†é¢‘å£çº¸æ’­æ”¾å™¨
 
-## Directory Ä¿Â¼
+## Directory ç›®å½•
 
 ---
 
-[¼òÌåÖĞÎÄ](document/readme/zh-cn.md)  
+[ç®€ä½“ä¸­æ–‡](document/zh-cn.md)  
+
+[English](document/en.md)
 
 ---
