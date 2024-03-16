@@ -27,7 +27,7 @@ Compiled by C++(Version: C++ 14)
 
 ## Function(s)/Feature(s)
 
-1. Muti-monitors playing  
+1. Multi-monitors playing  
 1. Auto-start at system boot  
 1. Custom GUI style-sheet  
 1. Saving playing data automatically  
@@ -38,19 +38,19 @@ Compiled by C++(Version: C++ 14)
 
 ## Runtime screenshot
 
-![BasicShow](image/en/BasicShow.jpg#pic_center)
+![BasicShow](image/en/BasicShow.png#pic_center)
 
 ---
 
-![FileShow](image/en/FileShow.jpg#pic_center)
+![FileShow](image/en/FileShow.png#pic_center)
 
 ---
 
-![PlaylistShow](image/en/PlaylistShow.jpg#pic_center)
+![PlaylistShow](image/en/PlaylistShow.png#pic_center)
 
 ---
 
-![TerminalShow](image/en/TerminalShow.jpg#pic_center)
+![TerminalShow](image/en/TerminalShow.png#pic_center)
 
 ---
 
@@ -69,19 +69,19 @@ Compiled by C++(Version: C++ 14)
 1. There are **Current panel** and **Auto-start** options in terminal  
 1. **Auto-start** sets the option of auto-start at system boot  
 1. **Current panel** controls the display of main window  
-1. The trayicon can also control the display of main window, see **Show panel** option  
+1. The tray icon can also control the display of main window, see **Show panel** option  
 
 ### Attention!
 
-The program will write the infomation to "regedit" while setting auto-start  
+The program will write the information to "regedit" while setting auto-start  
 
-The infomation will be deleted while the option is "OFF"  
+The information will be deleted while the option is "OFF"  
 
 ---
 
 ## Auto-save
 
-The program will save all the infomation(info) automatically while shutdown and exit  
+The program will save all the information(info) automatically while shutdown and exit  
 
 All the info will be stored in directory "***mediaData***" of the root  
 
@@ -111,10 +111,10 @@ The program offers six file-interfaces, which are all located in the directory "
 
 The description of those file-interfaces:  
 
-| Name | File | Descripetion |
+| Name | File | Description |
 | :-: | :-: | :-: |
 | BasicWidget | BasicWidget.css | Basic playback control |
-| FileWidget | FileWidget.css | Playfile control |
+| FileWidget | FileWidget.css | Playing files control |
 | MainWindow | MainWindow.css | Main window |
 | MediaWidget | MediaWidget.css | Background of media widget |
 | PlaylistWidget | PlaylistWidget.css | Playlist |
@@ -141,6 +141,6 @@ The player layer will be stacked, and the principle is not found yet
 
 ---
 
-### Linux is currently not sopported, it will be done in the future
+### Linux is currently not supported, it will be done in the future
 
 ---

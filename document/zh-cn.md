@@ -33,19 +33,19 @@
 
 ## 运行截图
 
-![BasicShow](image/zh-cn/BasicShow.jpg#pic_center)
+![BasicShow](image/zh-cn/BasicShow.png#pic_center)
 
 ---
 
-![FileShow](image/zh-cn/FileShow.jpg#pic_center)
+![FileShow](image/zh-cn/FileShow.png#pic_center)
 
 ---
 
-![PlaylistShow](image/zh-cn/PlaylistShow.jpg#pic_center)
+![PlaylistShow](image/zh-cn/PlaylistShow.png#pic_center)
 
 ---
 
-![TerminalShow](image/zh-cn/TerminalShow.jpg#pic_center)
+![TerminalShow](image/zh-cn/TerminalShow.png#pic_center)
 
 ---
 
