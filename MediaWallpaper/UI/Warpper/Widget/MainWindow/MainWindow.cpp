@@ -33,6 +33,8 @@ void MainWindow::allocation()
 
 void MainWindow::connection()
 {
+	connect(TrayIcon, &SystemTrayIcon::selectPanel, Terminal,
+		&TerminalWidget::setCurrentPanel);
 	connect(TrayIcon, &SystemTrayIcon::selectPanel, Panel,
 		&PanelWidget::selectPanel);
 	connect(TrayIcon, &SystemTrayIcon::terminal, Terminal,

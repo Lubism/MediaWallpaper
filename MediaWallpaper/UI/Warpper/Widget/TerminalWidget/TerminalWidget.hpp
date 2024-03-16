@@ -33,6 +33,7 @@ namespace UI
 		void setAutobootFile(bool data);
 	public:
 		void setFont(QString& type, Int size);
+		void setCurrentPanel(Int index);
 		void setAutoboot(bool state);
 		void updateLanguage();
 		void readInfo();

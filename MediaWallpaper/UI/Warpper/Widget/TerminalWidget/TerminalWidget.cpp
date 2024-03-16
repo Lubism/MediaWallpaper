@@ -132,7 +132,7 @@ void TerminalWidget::setAutobootFile(bool state)
 {
 	if (state == false)
 	{
-		int no_use = std::remove("autoboot.bat");
+		int no_use = std::remove("MediaWallpaper.bat");
 		return;
 	}
 
@@ -154,7 +154,7 @@ void TerminalWidget::setAutobootFile(bool state)
 	for (const auto& it : bat)
 		input += it;
 
-	QFile file("autoboot.bat");
+	QFile file("MediaWallpaper.bat");
 	file.open(QIODevice::WriteOnly | QIODevice::Truncate);
 
 	file.write(input.toLocal8Bit());
@@ -173,12 +173,17 @@ void TerminalWidget::setFont(QString& type, Int size)
 	FontComboBox->setCurrentIndex(index);
 }
 
+void TerminalWidget::setCurrentPanel(Int index)
+{
+	PanelComboBox->setCurrentIndex(index);
+}
+
 void TerminalWidget::setAutoboot(bool state)
 {
 	const QString regPath = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
 	std::unique_ptr<QSettings> Setting(new QSettings(regPath, QSettings::NativeFormat));
 	QString path = "\"" + QApplication::applicationDirPath().replace("/", "\\");
-	path += "\\autoboot.bat\"";
+	path += "\\MediaWallpaper.bat\"";
 
 	QString name = QApplication::applicationName();
 	this->setAutobootFile(state);
@@ -188,7 +193,6 @@ void TerminalWidget::setAutoboot(bool state)
 		return;
 	}
 
-	int no_use = std::remove("autoboot.dat");
 	Setting->remove(name);
 }
 
