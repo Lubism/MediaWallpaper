@@ -34,6 +34,8 @@ void MediaWidget::initialization()
 
 	Property::Apply(Handle, "wid", static_cast<long long>(
 		this->winId()), DesktopID);
+	
+	Property::Apply(Handle, "stop-screensaver", "no");
 
 	this->updateStyleSheet();
 	this->setPlaymode(0);
