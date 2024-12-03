@@ -17,10 +17,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5A2A0B2B-6128-425D-88F3-5C86ED45EBAA}</ProjectGuid>
+    <ProjectGuid>{FAB21453-4E0E-4A8F-ABDA-3A0B333DE014}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -37,12 +37,12 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>5.15.2_msvc2019_64</QtInstall>
+    <QtInstall>6.8.0</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>5.15.2_msvc2019_64</QtInstall>
+    <QtInstall>6.8.0</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
@@ -66,22 +66,22 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\IDEProject\Visual Studio 2022\C++\Libmpvcpp\Libmpvcpp\;E:\IDEProject\Visual Studio 2022\C++\MediaWallpaper\mpv\include\;E:\IDEProject\Visual Studio 2022\C++\MediaWallpaper\MediaWallpaper\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\src;.\external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>E:\IDEProject\Visual Studio 2022\C++\MediaWallpaper\mpv\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\external\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\IDEProject\Visual Studio 2022\C++\Libmpvcpp\Libmpvcpp\;E:\IDEProject\Visual Studio 2022\C++\MediaWallpaper\mpv\include\;E:\IDEProject\Visual Studio 2022\C++\MediaWallpaper\MediaWallpaper\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\external\;.\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>E:\IDEProject\VisualStudio2022\C++\MediaWallpaper\mpv\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\external\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -92,7 +92,7 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -109,77 +109,98 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="external\mpvcpp\code\mpvEndFileReason.hpp" />
+    <ClInclude Include="external\mpvcpp\code\mpvError.hpp" />
+    <ClInclude Include="external\mpvcpp\code\mpvEventID.hpp" />
+    <ClInclude Include="external\mpvcpp\code\mpvFormat.hpp" />
+    <ClInclude Include="external\mpvcpp\code\mpvLogLevel.hpp" />
+    <ClInclude Include="external\mpvcpp\mpvCommand.hpp" />
+    <ClInclude Include="external\mpvcpp\mpvEvent.hpp" />
+    <ClInclude Include="external\mpvcpp\mpvHandle.hpp" />
+    <ClInclude Include="external\mpvcpp\mpvNode.hpp" />
+    <ClInclude Include="external\mpvcpp\mpvProperty.hpp" />
+    <ClInclude Include="external\mpvcpp\render\mpvRenderContext.hpp" />
+    <ClInclude Include="external\mpvcpp\render\mpvRenderFrameInfo.hpp" />
+    <ClInclude Include="external\mpvcpp\render\mpvRenderFrameInfoType.hpp" />
+    <ClInclude Include="external\mpvcpp\render\mpvRenderParam.hpp" />
+    <ClInclude Include="external\mpvcpp\render\mpvRenderParamType.hpp" />
+    <ClInclude Include="external\mpvcpp\subEvent\mpvClientEvent.hpp" />
+    <ClInclude Include="external\mpvcpp\subEvent\mpvCommandEvent.hpp" />
+    <ClInclude Include="external\mpvcpp\subEvent\mpvEndFileEvent.hpp" />
+    <ClInclude Include="external\mpvcpp\subEvent\mpvHookEvent.hpp" />
+    <ClInclude Include="external\mpvcpp\subEvent\mpvLogEvent.hpp" />
+    <ClInclude Include="external\mpvcpp\subEvent\mpvPropertyEvent.hpp" />
+    <ClInclude Include="external\mpvcpp\subEvent\mpvStartFileEvent.hpp" />
+    <ClInclude Include="external\mpv\client.h" />
+    <ClInclude Include="external\mpv\render.h" />
+    <ClInclude Include="external\mpv\render_gl.h" />
+    <ClInclude Include="external\mpv\stream_cb.h" />
     <ClInclude Include="resource.h" />
-    <QtMoc Include="MediaWallpaper\MediaWallpaper.hpp" />
-    <ClInclude Include="MediaWallpaper\UI\Base\Button\PushButton.hpp" />
-    <ClInclude Include="MediaWallpaper\UI\Base\DesktopHandle\DesktopHandle.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PanelWidget\PanelWidget.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PlaylistWidget\PlaylistWidget.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\TerminalWidget\TerminalWidget.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Base\Widget\Widget.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PageWidget\PageWidget.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Base\MessageBox\MessageBox.hpp" />
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\DesktopInfo\DesktopInfo.hpp" />
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\JsonIO\JsonIO.hpp" />
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\JsonMap.hpp" />
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\PanelInfo\PanelInfo.hpp" />
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\ProgramInfo\ProgramInfo.hpp" />
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\StyleSheet.hpp" />
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\Translator\Translator.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Warpper\SystemTrayIcon\SystemTrayIcon.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\DirInfoWidget\DirInfoWidget.hpp" />
-    <ClInclude Include="mpv\include\mpv\client.h" />
-    <ClInclude Include="mpv\include\mpv\render.h" />
-    <ClInclude Include="mpv\include\mpv\render_gl.h" />
-    <ClInclude Include="mpv\include\mpv\stream_cb.h" />
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\MediaWidget\MediaWidget.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\MainWindow\MainWindow.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\FileWidget\FileWidget.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\BasicWidget\BasicWidget.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Base\Label.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Base\Slider\Slider.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Base\LineEdit\LineEdit.hpp" />
-    <QtMoc Include="MediaWallpaper\UI\Base\ComboBox\ComboBox.hpp" />
+    <QtMoc Include="src\UI\Basic\ComboBox.hpp" />
+    <QtMoc Include="src\UI\Basic\Label.hpp" />
+    <QtMoc Include="src\UI\Basic\LineEdit.hpp" />
+    <ClInclude Include="src\UI\Basic\MediaWidget.hpp" />
+    <QtMoc Include="src\UI\Basic\MessageBox.hpp" />
+    <ClInclude Include="src\UI\Basic\PushButton.hpp" />
+    <QtMoc Include="src\UI\Basic\Slider.hpp" />
+    <QtMoc Include="src\UI\Basic\SliderEdit.hpp" />
+    <ClInclude Include="src\UI\Basic\Widget.hpp" />
+    <QtMoc Include="src\UI\Core\APP\APPCore.hpp" />
+    <QtMoc Include="src\UI\Core\GUI\GUICore.hpp" />
+    <QtMoc Include="src\UI\Core\Media\MediaCore.hpp" />
+    <ClInclude Include="src\UI\Data\DisplayInfo\DisplayInfo.hpp" />
+    <ClInclude Include="src\UI\Data\Json.hpp" />
+    <ClInclude Include="src\UI\Data\JsonIO.hpp" />
+    <ClInclude Include="src\UI\Data\JsonMap.hpp" />
+    <ClInclude Include="src\UI\Data\ScreenInfo\ScreenInfo.hpp" />
+    <ClInclude Include="src\UI\Data\ShellWindow\ShellWindow.hpp" />
+    <ClInclude Include="src\UI\Data\StartupInfo.hpp" />
+    <ClInclude Include="src\UI\Data\StreamInfo.hpp" />
+    <ClInclude Include="src\UI\Data\StyleSheet.hpp" />
+    <ClInclude Include="src\UI\Data\TerminalInfo\TerminalInfo.hpp" />
+    <ClInclude Include="src\UI\Data\Translator\Translator.hpp" />
+    <QtMoc Include="src\UI\Panel\Basic\BasicPanel.hpp" />
+    <QtMoc Include="src\UI\Panel\Display\DisplayPanel.hpp" />
+    <QtMoc Include="src\UI\Panel\File\FilePanel.hpp" />
+    <ClInclude Include="src\UI\MediaWallpaper.hpp" />
+    <ClInclude Include="src\UI\Panel\Media\MediaPanel.hpp" />
+    <QtMoc Include="src\UI\Panel\Playlist\PlaylistPanel.hpp" />
+    <QtMoc Include="src\UI\Panel\Terminal\TerminalPanel.hpp" />
+    <QtMoc Include="src\UI\Surface\MainWindow\MainWindow.hpp" />
+    <QtMoc Include="src\UI\Surface\SystemTrayIcon\SystemTrayIcon.hpp" />
+    <ClInclude Include="src\UI\Surface\TrayIcon\TrayIcon.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MediaWallpaper\MediaWallpaper.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Base\ComboBox\ComboBox.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Base\DesktopHandle\DesktopHandle.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Base\LineEdit\LineEdit.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Base\MessageBox\MessageBox.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Base\Slider\Slider.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Data\DesktopInfo\DesktopInfo.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Data\JsonIO\JsonIO.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Data\PanelInfo\PanelInfo.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Data\ProgramInfo\ProgramInfo.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Data\Translator\Translator.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\SystemTrayIcon\SystemTrayIcon.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\BasicWidget\BasicWidget.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\DirInfoWidget\DirInfoWidget.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\FileWidget\FileWidget.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\MainWindow\MainWindow.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\MediaWidget\MediaWidget.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\PageWidget\PageWidget.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\PanelWidget\PanelWidget.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\PlaylistWidget\PlaylistWidget.cpp" />
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\TerminalWidget\TerminalWidget.cpp" />
+    <Library Include="external\lib\libmpv.dll.a" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".gitattributes" />
-    <None Include=".gitignore" />
-    <None Include="LICENSE" />
-    <None Include="mpv\mpv.def" />
-    <None Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="mpv\libmpv.dll.a" />
+    <Image Include="resources\image\Icon.ico" />
+    <Image Include="resources\image\MainIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MediaWallpaper.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\image\MainIcon.ico" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\UI\Core\APP\APPCore.cpp" />
+    <ClCompile Include="src\UI\Core\GUI\GUICore.cpp" />
+    <ClCompile Include="src\UI\Core\Media\MediaCore.cpp" />
+    <ClCompile Include="src\UI\Data\DisplayInfo\DisplayInfo.cpp" />
+    <ClCompile Include="src\UI\Data\ScreenInfo\ScreenInfo.cpp" />
+    <ClCompile Include="src\UI\Data\ShellWindow\ShellWindow.cpp" />
+    <ClCompile Include="src\UI\Data\TerminalInfo\TerminalInfo.cpp" />
+    <ClCompile Include="src\UI\Data\Translator\Translator.cpp" />
+    <ClCompile Include="src\UI\Panel\Basic\BasicPanel.cpp" />
+    <ClCompile Include="src\UI\Panel\Display\DisplayPanel.cpp" />
+    <ClCompile Include="src\UI\Panel\File\FilePanel.cpp" />
+    <ClCompile Include="src\UI\Panel\Media\MediaPanel.cpp" />
+    <ClCompile Include="src\UI\Panel\Playlist\PlaylistPanel.cpp" />
+    <ClCompile Include="src\UI\Panel\Terminal\TerminalPanel.cpp" />
+    <ClCompile Include="src\UI\Surface\MainWindow\MainWindow.cpp" />
+    <ClCompile Include="src\UI\Surface\SystemTrayIcon\SystemTrayIcon.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

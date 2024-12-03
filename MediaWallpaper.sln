@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.8.34330.188
+VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MediaWallpaper", "MediaWallpaper.vcxproj", "{5A2A0B2B-6128-425D-88F3-5C86ED45EBAA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MediaWallpaper", "MediaWallpaper.vcxproj", "{FAB21453-4E0E-4A8F-ABDA-3A0B333DE014}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{AC277258-0A4F-4730-8056-B4609B356C19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +13,15 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5A2A0B2B-6128-425D-88F3-5C86ED45EBAA}.Debug|x64.ActiveCfg = Debug|x64
-		{5A2A0B2B-6128-425D-88F3-5C86ED45EBAA}.Debug|x64.Build.0 = Debug|x64
-		{5A2A0B2B-6128-425D-88F3-5C86ED45EBAA}.Release|x64.ActiveCfg = Release|x64
-		{5A2A0B2B-6128-425D-88F3-5C86ED45EBAA}.Release|x64.Build.0 = Release|x64
+		{FAB21453-4E0E-4A8F-ABDA-3A0B333DE014}.Debug|x64.ActiveCfg = Debug|x64
+		{FAB21453-4E0E-4A8F-ABDA-3A0B333DE014}.Debug|x64.Build.0 = Debug|x64
+		{FAB21453-4E0E-4A8F-ABDA-3A0B333DE014}.Release|x64.ActiveCfg = Release|x64
+		{FAB21453-4E0E-4A8F-ABDA-3A0B333DE014}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8A2BAAE2-A04A-45C9-8BAB-59CB57230567}
+		SolutionGuid = {C645257A-B224-4FE2-998D-DBD5EF7F99B9}
 	EndGlobalSection
 EndGlobal

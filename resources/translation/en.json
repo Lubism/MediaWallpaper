@@ -1,78 +1,103 @@
 {
-    "MainGroup":
+    "MainWindow":
     {
         "Main": "MediaWallpaper"
     },
 
-    "BasicGroup":
+    "BasicPanel":
     {
         "Stop": "■",
         "Last": "|◀",
         "Next": "▶|",
         "Pause": "||",
 
-        "Mute": "Mute",
         "Basic": "Basic",
         "Speed": "Speed",
         "Volume": "Volume",
+        "Mute": "Mute",
 
-        "Desktop": "DesktopID:",
-        "FileName": "Not playing",
-        "Subtitle": "Close Subtitle"
+        "Monitor": "Monitor ID:",
+        "Subtitle": "Close subtitle",
+        "FileName": "Not playing"
     },
 
-    "FileGroup":
+    "FilePanel":
     {
         "File": "File",
+        "HFlip": "HFlip",
+        "VFlip": "VFlip",
         "Playmode": "Playmode",
-        "ListLoop": "Listloop",
-        "SingleLoop": "Singleloop",
-
-        "Accept": "Yes",
+        "ListLoop": "List-loop",
+        "SingleLoop": "Single-loop",
+        
+        "None": "Nothing",
+        "Mute":"Mute",
+        "Pause": "Pause",
+        "Accept": "Sure",
         "Reject": "No",
-        "ClearInfo": "Clear panel info",
-        "ClearInfoWarn": "Sure ?",
-        "RefreshDisplay": "Refresh display",
+
+        "AtFocus": "When focused do",
+        "AtFullscreen": "When fullscreen do",
+        "ClearInfo": "Clear panel information",
+        "ClearInfoWarn": "Are you sure about that ?",
+        "LoadConfig": "Load media config",
         "SelectDirectory": "Select a directory",
+        "UpdatePlaylist": "Update playlist",
         "DirectoryPath": "No selected directory"
     },
 
-    "PlaylistGroup":
+    "PlaylistPanel":
     {
         "Playlist": "Playlist"
     },
 
-    "TerminalGroup":
+    "DisplayPanel":
     {
-        "Font": "Font",
+        "AspectRatio": "Aspect ratio",
+        "Brightness": "Brightness",
+        "Saturation": "Saturation",
+        "Contrast": "Contrast",
+        "Panscan": "Panscan",
+
+        "Rotate": "Rotation(angle)",
+        "HAlign": "Horizontal alignment",
+        "VAlign": "Vertical alignment",
+        "Gamma": "Gamma",
+        "Hue": "Hue",
+
+        "HFlip": "HFlip",
+        "VFlip": "VFlip",
+
+        "Display": "Display"
+    },
+
+    "TerminalPanel":
+    {
+        "AboutQt": "About program",
+
         "Lang": "Language",
-        "Panel": "Current panel",
+        "Font": "Font",
+        "Monitor": "Current panel",
 
         "No": "OFF",
         "Yes": "ON",
-        "Autoboot": "Auto-start",
+        "Startup": "Startup at booting",
         "Fontsize": "Font size",
 
         "Terminal": "Terminal",
-        "Desktop": "DesktopID:",
-        "UpdateDisplay": "Update display",
-        "RefreshDisplay":"Refresh display",
+        "MonitorID": "Monitor#",
+        "LoadAllConfig": "Load all media config",
+        "UpdatePlaylist": "Update playlist",
         "UpdateStyleSheet": "Update stylesheet"
     },
 
-    "TrayIconGroup":
+    "TrayIcon":
     {
-        "Show": "Show",
-        "Quit": "Quit",
-        "Screen": "Desktop",
+        "Showup": "Showup",
+        "Shutdown": "Quit",
+        "MonitorID": "Monitor#",
         "Terminal": "Terminal",
-        "MainMenu": "MainMenu",
-        "ScreenMenu": "Show panel"
-    },
-
-    "DirInfoGroup":
-    {
-        "Back": "Return",
-        "Name": "Directory list"
+        "MainMenu": "Main menu",
+        "MonitorMenu": "Show panel"
     }
 }

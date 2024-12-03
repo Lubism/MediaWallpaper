@@ -23,181 +23,149 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MediaWallpaper\UI\Base\Button\PushButton.hpp">
+    <ClInclude Include="external\mpv\client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MediaWallpaper\UI\Base\DesktopHandle\DesktopHandle.hpp">
+    <ClInclude Include="external\mpv\render.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mpv\include\mpv\client.h">
+    <ClInclude Include="external\mpv\render_gl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mpv\include\mpv\render.h">
+    <ClInclude Include="external\mpv\stream_cb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mpv\include\mpv\render_gl.h">
+    <ClInclude Include="external\mpvcpp\code\mpvEndFileReason.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mpv\include\mpv\stream_cb.h">
+    <ClInclude Include="external\mpvcpp\code\mpvError.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\Translator\Translator.hpp">
+    <ClInclude Include="external\mpvcpp\code\mpvEventID.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\DesktopInfo\DesktopInfo.hpp">
+    <ClInclude Include="external\mpvcpp\code\mpvFormat.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\JsonIO\JsonIO.hpp">
+    <ClInclude Include="external\mpvcpp\code\mpvLogLevel.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\JsonMap.hpp">
+    <ClInclude Include="external\mpvcpp\render\mpvRenderContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\ProgramInfo\ProgramInfo.hpp">
+    <ClInclude Include="external\mpvcpp\render\mpvRenderFrameInfo.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\PanelInfo\PanelInfo.hpp">
+    <ClInclude Include="external\mpvcpp\render\mpvRenderFrameInfoType.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MediaWallpaper\UI\Warpper\Data\StyleSheet.hpp">
+    <ClInclude Include="external\mpvcpp\render\mpvRenderParam.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\render\mpvRenderParamType.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\subEvent\mpvClientEvent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\subEvent\mpvCommandEvent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\subEvent\mpvEndFileEvent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\subEvent\mpvHookEvent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\subEvent\mpvLogEvent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\subEvent\mpvPropertyEvent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\subEvent\mpvStartFileEvent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\mpvCommand.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\mpvEvent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\mpvHandle.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\mpvNode.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\mpvcpp\mpvProperty.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Surface\TrayIcon\TrayIcon.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\UI\Basic\MediaWidget.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Basic\PushButton.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Basic\Widget.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Data\DisplayInfo\DisplayInfo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Data\ScreenInfo\ScreenInfo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Data\ShellWindow\ShellWindow.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Data\TerminalInfo\TerminalInfo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Data\Translator\Translator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Data\Json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Data\JsonIO.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Data\JsonMap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Data\StartupInfo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Data\StreamInfo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Data\StyleSheet.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Panel\Media\MediaPanel.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\MediaWallpaper.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MediaWallpaper\UI\Base\ComboBox\ComboBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Base\LineEdit\LineEdit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Base\Slider\Slider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\BasicWidget\BasicWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\FileWidget\FileWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\MainWindow\MainWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\MediaWidget\MediaWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\PageWidget\PageWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\MediaWallpaper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\TerminalWidget\TerminalWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\PlaylistWidget\PlaylistWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\PanelWidget\PanelWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Data\Translator\Translator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\SystemTrayIcon\SystemTrayIcon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Data\DesktopInfo\DesktopInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Data\JsonIO\JsonIO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Data\ProgramInfo\ProgramInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Data\PanelInfo\PanelInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Base\MessageBox\MessageBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Base\DesktopHandle\DesktopHandle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MediaWallpaper\UI\Warpper\Widget\DirInfoWidget\DirInfoWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <Library Include="external\lib\libmpv.dll.a" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="MediaWallpaper\UI\Base\ComboBox\ComboBox.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Base\LineEdit\LineEdit.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Base\Slider\Slider.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Base\Label.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\BasicWidget\BasicWidget.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\FileWidget\FileWidget.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\MainWindow\MainWindow.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\MediaWidget\MediaWidget.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PageWidget\PageWidget.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Base\Widget\Widget.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\TerminalWidget\TerminalWidget.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PlaylistWidget\PlaylistWidget.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\PanelWidget\PanelWidget.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Warpper\SystemTrayIcon\SystemTrayIcon.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Base\MessageBox\MessageBox.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\MediaWallpaper.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="MediaWallpaper\UI\Warpper\Widget\DirInfoWidget\DirInfoWidget.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="mpv\mpv.def">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include=".gitattributes" />
-    <None Include=".gitignore" />
-    <None Include="LICENSE" />
-    <None Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="mpv\libmpv.dll.a" />
+    <Image Include="resources\image\MainIcon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\image\Icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MediaWallpaper.rc">
@@ -205,8 +173,109 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\image\MainIcon.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <QtMoc Include="src\UI\Basic\ComboBox.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Basic\Label.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Basic\LineEdit.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Basic\MessageBox.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Basic\Slider.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Basic\SliderEdit.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Core\APP\APPCore.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Core\GUI\GUICore.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Core\Media\MediaCore.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Panel\Basic\BasicPanel.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Panel\Display\DisplayPanel.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Panel\File\FilePanel.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Panel\Playlist\PlaylistPanel.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Panel\Terminal\TerminalPanel.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Surface\MainWindow\MainWindow.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\UI\Surface\SystemTrayIcon\SystemTrayIcon.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\UI\Core\APP\APPCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Core\GUI\GUICore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Core\Media\MediaCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Data\DisplayInfo\DisplayInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Data\ScreenInfo\ScreenInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Data\ShellWindow\ShellWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Data\TerminalInfo\TerminalInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Data\Translator\Translator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Panel\Basic\BasicPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Panel\Display\DisplayPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Panel\File\FilePanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Panel\Media\MediaPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Panel\Playlist\PlaylistPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Panel\Terminal\TerminalPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Surface\MainWindow\MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Surface\SystemTrayIcon\SystemTrayIcon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
